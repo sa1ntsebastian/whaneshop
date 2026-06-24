@@ -1,0 +1,27 @@
+{%- comment -%}
+  Menu band — shared header used on every page EXCEPT the homepage.
+  Params:
+    variant: 'default' (cobalt on white, bottom border) | 'overlay' (white, over imagery)
+  Nav links + wordmark come from theme settings (Navigation group).
+{%- endcomment -%}
+{%- liquid
+  assign variant = variant | default: 'default'
+  assign classes = 'menu-band'
+  if variant == 'overlay'
+    assign classes = 'menu-band menu-band--overlay menu-band--on-cobalt'
+  endif
+-%}
+<header class="{{ classes }}">
+  <a href="{{ routes.root_url }}" class="menu-band__wordmark">{{ settings.wordmark | escape }}</a>
+  <nav class="menu-band__nav" aria-label="Primary">
+    {%- if settings.nav_shop_label != blank -%}
+      <a class="whane-link" href="{{ settings.nav_shop_link | default: '#' }}" style="font-size:12px;">{{ settings.nav_shop_label | escape }}</a>
+    {%- endif -%}
+    {%- if settings.nav_lookbook_label != blank -%}
+      <a class="whane-link" href="{{ settings.nav_lookbook_link | default: '#' }}" style="font-size:12px;">{{ settings.nav_lookbook_label | escape }}</a>
+    {%- endif -%}
+    {%- if settings.nav_info_label != blank -%}
+      <a class="whane-link" href="{{ settings.nav_info_link | default: '#' }}" style="font-size:12px;">{{ settings.nav_info_label | escape }}</a>
+    {%- endif -%}
+  </nav>
+</header>

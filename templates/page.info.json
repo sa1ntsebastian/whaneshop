@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "info": {
+      "type": "info",
+      "settings": {
+        "heading": "Info"
+      }
+    }
+  },
+  "order": ["info"]
+}

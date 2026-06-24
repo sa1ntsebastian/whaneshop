@@ -3,107 +3,141 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WHANE — Homepage directions (desktop preview)</title>
+<title>WHANE — Pages (desktop preview)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 <style>
-  /* Real licensed display face, with Anton as metric fallback */
-  @font-face{
-    font-family:"Druk Condensed";
-    src:url("../assets/DrukCondLCGSuper.ttf") format("truetype");
-    font-weight:900; font-style:normal; font-display:swap;
-  }
-  @font-face{
-    font-family:"Druk Condensed";
-    src:url("../assets/DrukCondLCGSuperItalic.ttf") format("truetype");
-    font-weight:900; font-style:italic; font-display:swap;
-  }
-  :root{ --cobalt:#1B2BC4; --white:#FFFFFF;
-    --display:"Druk Condensed","Anton",sans-serif; --mono:"Courier New",monospace; }
+  @font-face{font-family:"Druk Condensed";src:url("../assets/DrukCondLCGSuper.ttf") format("truetype");font-weight:900;font-style:normal;font-display:swap;}
+  @font-face{font-family:"Druk Condensed";src:url("../assets/DrukCondLCGSuperItalic.ttf") format("truetype");font-weight:900;font-style:italic;font-display:swap;}
+  :root{--cobalt:#1B2BC4;--white:#FFFFFF;--display:"Druk Condensed","Anton",sans-serif;--mono:"Courier New",monospace;--pad-x:56px;}
   *,*::before,*::after{box-sizing:border-box;border-radius:0;}
   body{margin:0;background:#e9e9ef;font-family:var(--mono);color:var(--cobalt);}
   .lab{font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--cobalt);text-transform:uppercase;margin:40px 0 14px;}
-  .frame{width:1440px;height:960px;background:var(--white);overflow:hidden;margin:0 auto;}
+  .frame{width:1440px;height:960px;background:var(--white);overflow:hidden;margin:0 auto;position:relative;}
   .wrap{width:1440px;margin:0 auto;padding-bottom:80px;}
   .meta{font-family:var(--mono);text-transform:uppercase;letter-spacing:2px;color:var(--cobalt);}
+  .link{font-family:var(--mono);text-transform:uppercase;letter-spacing:2px;color:var(--cobalt);font-size:12px;text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;}
+  .link:hover{border-bottom-color:var(--cobalt);}
 
-  /* Dir 01 */
-  .d1{height:100%;display:flex;flex-direction:column;}
-  .d1 .hd{display:flex;justify-content:space-between;align-items:center;padding:40px 56px;}
-  .d1 .nav{display:flex;gap:36px;}
-  .d1 .main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 56px;}
-  .d1 .word{font-family:var(--display);font-size:240px;line-height:.82;letter-spacing:-4px;color:var(--cobalt);text-transform:uppercase;}
-  .d1 .prod{display:flex;flex-direction:column;align-items:center;margin-top:64px;}
-  .d1 .shot{width:196px;height:266px;border:1px solid var(--cobalt);display:flex;align-items:center;justify-content:center;
-    background:repeating-linear-gradient(135deg,#fff 0 14px,rgba(27,43,196,.06) 14px 15px);}
-  .d1 .ft{display:flex;justify-content:space-between;align-items:center;padding:32px 56px;border-top:1px solid var(--cobalt);}
+  /* menu band */
+  .band{display:flex;justify-content:space-between;align-items:center;padding:32px var(--pad-x);border-bottom:1px solid var(--cobalt);background:var(--white);}
+  .band__word{font-family:var(--display);font-size:26px;text-transform:uppercase;color:var(--cobalt);}
+  .band__nav{display:flex;gap:36px;align-items:center;}
+  .band--overlay{position:absolute;top:0;left:0;right:0;z-index:4;background:transparent;border-bottom:0;}
+  .band--overlay .band__word{color:#fff;} .band--overlay .link{color:#fff;}
 
-  /* Dir 02 */
-  .d2{height:100%;display:flex;flex-direction:column;}
-  .d2 .hd{display:flex;justify-content:space-between;align-items:center;padding:32px 56px;border-bottom:1px solid var(--cobalt);}
-  .d2 .word{font-family:var(--display);font-size:26px;color:var(--cobalt);text-transform:uppercase;}
-  .d2 .body{flex:1;display:flex;}
-  .d2 .media{width:56%;border-right:1px solid var(--cobalt);display:flex;align-items:flex-end;padding:40px;
-    background:repeating-linear-gradient(135deg,var(--cobalt) 0 17px,rgba(255,255,255,.10) 17px 19px);}
-  .d2 .info{width:44%;padding:64px 64px 56px;display:flex;flex-direction:column;justify-content:center;}
-  .d2 .title{font-family:var(--display);font-size:96px;line-height:.86;letter-spacing:-2px;color:var(--cobalt);text-transform:uppercase;margin:14px 0 0;}
-  .d2 .bar{height:10px;border:1px solid var(--cobalt);margin-top:12px;}
-  .d2 .fill{height:100%;width:63%;background:var(--cobalt);}
-  .d2 .timer{font-family:var(--display);font-size:52px;line-height:1;letter-spacing:1px;color:var(--cobalt);margin-top:6px;font-variant-numeric:tabular-nums;}
-  .d2 .cta{background:var(--cobalt);color:#fff;text-align:center;padding:20px;margin-top:36px;font-family:var(--mono);font-size:13px;letter-spacing:3px;text-transform:uppercase;}
+  /* HOME */
+  .home{height:100%;display:flex;flex-direction:column;}
+  .home__hd{display:flex;justify-content:space-between;align-items:center;padding:40px var(--pad-x);}
+  .home__nav{display:flex;gap:36px;}
+  .home__main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .home__word{font-family:var(--display);font-size:240px;line-height:.82;letter-spacing:-4px;color:var(--cobalt);text-transform:uppercase;}
+  .btn-outline{display:inline-block;margin-top:56px;background:#fff;color:var(--cobalt);border:1px solid var(--cobalt);padding:18px 48px;font-family:var(--mono);font-size:13px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;}
+  .btn-outline:hover{background:var(--cobalt);color:#fff;}
+  .home__ft{display:flex;justify-content:space-between;align-items:center;padding:32px var(--pad-x);border-top:1px solid var(--cobalt);}
 
-  /* Dir 03 */
-  .d3{height:100%;position:relative;background:repeating-linear-gradient(135deg,var(--cobalt) 0 19px,rgba(255,255,255,.09) 19px 21px);}
-  .d3 .top{position:absolute;top:40px;left:56px;right:56px;display:flex;justify-content:space-between;align-items:flex-start;color:#fff;}
-  .d3 .word{font-family:var(--display);font-size:30px;color:#fff;text-transform:uppercase;}
-  .d3 .bot{position:absolute;bottom:48px;left:56px;right:56px;display:flex;justify-content:space-between;align-items:flex-end;}
-  .d3 .head{font-family:var(--display);font-size:64px;line-height:.9;letter-spacing:-1px;color:#fff;text-transform:uppercase;margin:0;}
-  .d3 .enter{font-family:var(--mono);font-size:12px;letter-spacing:3px;color:#fff;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:4px;}
+  /* SHOP carousel */
+  .shop{height:100%;display:flex;flex-direction:column;overflow:hidden;background:#fff;}
+  .shop__viewport{flex:1;min-height:0;position:relative;}
+  .shop__track{display:flex;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;}
+  .shop__track::-webkit-scrollbar{display:none;}
+  .shop__slide{flex:0 0 100%;width:100%;height:100%;scroll-snap-align:start;display:flex;}
+  .shop__media{width:56%;border-right:1px solid var(--cobalt);position:relative;overflow:hidden;background:repeating-linear-gradient(135deg,var(--cobalt) 0 17px,rgba(255,255,255,.10) 17px 19px);}
+  .shop__media-cap{position:absolute;left:40px;bottom:40px;color:#fff;font-size:11px;letter-spacing:2px;text-transform:uppercase;}
+  .shop__info{width:44%;padding:56px 64px;display:flex;flex-direction:column;justify-content:center;}
+  .shop__title{font-family:var(--display);font-size:88px;line-height:.86;letter-spacing:-2px;text-transform:uppercase;color:var(--cobalt);margin:14px 0 0;}
+  .shop__count{font-family:var(--display);font-size:52px;line-height:1;color:var(--cobalt);margin-top:4px;}
+  .shop__count small{font-family:var(--mono);font-size:12px;letter-spacing:2px;}
+  .shop__bar{height:10px;border:1px solid var(--cobalt);margin-top:16px;}
+  .shop__bar-fill{height:100%;background:var(--cobalt);}
+  .shop__cta{display:block;width:100%;max-width:320px;margin-top:32px;background:var(--cobalt);color:#fff;border:1px solid var(--cobalt);text-align:center;padding:20px;font-family:var(--mono);font-size:13px;letter-spacing:3px;text-transform:uppercase;}
+  .shop__arrow{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;z-index:3;border:1px solid var(--cobalt);background:#fff;color:var(--cobalt);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:20px;cursor:pointer;}
+  .shop__arrow:hover{background:var(--cobalt);color:#fff;}
+  .shop__arrow[disabled]{opacity:.25;cursor:not-allowed;}
+  .shop__arrow--prev{left:24px;}.shop__arrow--next{right:24px;}
+  .shop__counter{position:absolute;left:var(--pad-x);bottom:28px;z-index:3;font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--cobalt);text-transform:uppercase;}
+
+  /* LOOKBOOK */
+  .lb{height:100%;position:relative;background:repeating-linear-gradient(135deg,var(--cobalt) 0 19px,rgba(255,255,255,.09) 19px 21px);}
+  .lb__bot{position:absolute;bottom:48px;left:var(--pad-x);right:var(--pad-x);display:flex;justify-content:space-between;align-items:flex-end;}
+  .lb__head{font-family:var(--display);font-size:64px;line-height:.9;letter-spacing:-1px;color:#fff;text-transform:uppercase;margin:0;}
+  .lb__enter{font-family:var(--mono);font-size:12px;letter-spacing:3px;color:#fff;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:4px;text-decoration:none;}
+
+  /* INFO */
+  .info{height:100%;display:flex;flex-direction:column;background:#fff;}
+  .info__body{flex:1;min-height:0;padding:0 var(--pad-x);display:flex;}
+  .info__inner{margin:auto 0;max-width:760px;}
+  .info__title{font-family:var(--display);font-size:96px;line-height:.86;letter-spacing:-2px;text-transform:uppercase;margin:0 0 28px;}
+  .rte{font-family:var(--mono);font-size:14px;line-height:1.8;max-width:60ch;}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <div class="lab">01 — Maximal reduziert · Galerie</div>
-  <div class="frame"><div class="d1">
-    <div class="hd"><span class="meta" style="font-size:12px">Est. MMXXVI</span>
-      <div class="nav"><span class="meta" style="font-size:12px">Shop</span><span class="meta" style="font-size:12px">Info</span></div></div>
-    <div class="main"><div class="word">WHANE.</div>
-      <div class="prod"><div class="shot"><span class="meta" style="font-size:10px;text-align:center;line-height:1.6">product<br>shot</span></div>
-        <span class="meta" style="font-size:11px;margin-top:18px">Object 01 · Limited to 50</span></div></div>
-    <div class="ft"><span class="meta" style="font-size:11px">© WHANE</span><span class="meta" style="font-size:11px">Berlin</span></div>
+  <div class="lab">Home — Galerie (kein Menüband, Button „Zum Shop")</div>
+  <div class="frame"><div class="home">
+    <div class="home__hd"><span class="meta" style="font-size:12px">Est. MMXXVI</span>
+      <div class="home__nav"><a class="link" href="#">Shop</a><a class="link" href="#">Lookbook</a><a class="link" href="#">Info</a></div></div>
+    <div class="home__main"><div class="home__word">WHANE.</div><a class="btn-outline" href="#">Zum Shop</a></div>
+    <div class="home__ft"><span class="meta" style="font-size:11px">© WHANE</span><span class="meta" style="font-size:11px">Berlin</span></div>
   </div></div>
 
-  <div class="lab">02 — Drop-fokussiert · Knappheit</div>
-  <div class="frame"><div class="d2">
-    <div class="hd"><span class="word">WHANE.</span><span class="meta" style="font-size:12px">Drop 01 · 24.06.26</span></div>
-    <div class="body">
-      <div class="media"><span class="meta" style="font-size:11px;color:#fff">Product shot · Field jacket — front</span></div>
-      <div class="info">
-        <span class="meta" style="font-size:12px;letter-spacing:3px">The current drop</span>
-        <div class="title">Drop<br>01</div>
-        <div class="meta" style="font-size:13px;letter-spacing:1px;margin-top:28px">Field Jacket / Cobalt — €280</div>
-        <div style="margin-top:40px">
-          <div style="display:flex;justify-content:space-between;align-items:baseline">
-            <span class="meta" style="font-size:12px">37 / 100 available</span><span class="meta" style="font-size:12px">Limited to 100</span></div>
-          <div class="bar"><div class="fill"></div></div></div>
-        <div style="margin-top:36px"><span class="meta" style="font-size:12px;letter-spacing:3px">Drop closes in</span>
-          <div class="timer js-drop-countdown" data-fallback-seconds="172333">00:00:00</div></div>
-        <div class="cta">Reserve</div>
-        <span class="meta" style="font-size:11px;margin-top:28px;text-decoration:line-through">Drop 00 · Field Cap — Sold out</span>
-      </div></div>
+  <div class="lab">Shop / Drops — Karussell (← → / wischen, kein Countdown, Stückzahl-Counter)</div>
+  <div class="frame"><div class="shop" data-carousel>
+    <div class="band"><a class="band__word" href="#">WHANE.</a>
+      <div class="band__nav"><a class="link" href="#">Shop</a><a class="link" href="#">Lookbook</a><a class="link" href="#">Info</a></div></div>
+    <div class="shop__viewport">
+      <button class="shop__arrow shop__arrow--prev" aria-label="Previous">&larr;</button>
+      <button class="shop__arrow shop__arrow--next" aria-label="Next">&rarr;</button>
+      <span class="shop__counter">01 / 03</span>
+      <div class="shop__track" tabindex="0">
+        <article class="shop__slide"><div class="shop__media"><span class="shop__media-cap">Field Jacket — front</span></div>
+          <div class="shop__info"><span class="meta" style="font-size:12px;letter-spacing:3px">Drop 01</span>
+            <h2 class="shop__title">Field Jacket</h2><span class="meta" style="font-size:13px;margin-top:24px">€280</span>
+            <div style="margin-top:36px"><span class="meta" style="font-size:12px">Available</span>
+              <div class="shop__count">37<small> / 100 · Limited to 100</small></div>
+              <div class="shop__bar"><div class="shop__bar-fill" style="width:63%"></div></div></div>
+            <span class="shop__cta">Reserve</span></div></article>
+        <article class="shop__slide"><div class="shop__media"><span class="shop__media-cap">Field Cap — front</span></div>
+          <div class="shop__info"><span class="meta" style="font-size:12px;letter-spacing:3px">Drop 01</span>
+            <h2 class="shop__title">Field Cap</h2><span class="meta" style="font-size:13px;margin-top:24px">€90</span>
+            <div style="margin-top:36px"><span class="meta" style="font-size:12px">Available</span>
+              <div class="shop__count">8<small> / 50 · Limited to 50</small></div>
+              <div class="shop__bar"><div class="shop__bar-fill" style="width:84%"></div></div></div>
+            <span class="shop__cta">Reserve</span></div></article>
+        <article class="shop__slide"><div class="shop__media"><span class="shop__media-cap">Mono Tee — front</span></div>
+          <div class="shop__info"><span class="meta" style="font-size:12px;letter-spacing:3px">Drop 01</span>
+            <h2 class="shop__title">Mono Tee</h2><span class="meta" style="font-size:13px;margin-top:24px">€60</span>
+            <div style="margin-top:36px"><span class="meta" style="font-size:12px">Available</span>
+              <div class="shop__count">120<small> / 200 · Limited to 200</small></div>
+              <div class="shop__bar"><div class="shop__bar-fill" style="width:40%"></div></div></div>
+            <span class="shop__cta">Reserve</span></div></article>
+      </div>
+    </div>
   </div></div>
 
-  <div class="lab">03 — Editorial · Lookbook</div>
-  <div class="frame"><div class="d3">
-    <div class="top"><span class="word">WHANE.</span><span class="meta" style="font-size:11px;color:#fff">MMXXVI</span></div>
-    <div class="bot">
-      <div><h1 class="head">Autumn<br>Field</h1><span class="meta" style="font-size:11px;color:#fff;display:block;margin-top:16px">Look 01 / 06</span></div>
-      <span class="enter">Enter shop →</span></div>
+  <div class="lab">Lookbook — Vollbild + Menüband (weiß)</div>
+  <div class="frame"><div class="lb">
+    <div class="band band--overlay"><a class="band__word" href="#">WHANE.</a>
+      <div class="band__nav"><a class="link" href="#">Shop</a><a class="link" href="#">Lookbook</a><a class="link" href="#">Info</a></div></div>
+    <div class="lb__bot">
+      <div><h1 class="lb__head">Autumn<br>Field</h1><span class="meta" style="font-size:11px;color:#fff;display:block;margin-top:16px">Look 01 / 06</span></div>
+      <a class="lb__enter" href="#">Enter shop →</a></div>
+  </div></div>
+
+  <div class="lab">Info — Vollbild, sparsam + Menüband</div>
+  <div class="frame"><div class="info">
+    <div class="band"><a class="band__word" href="#">WHANE.</a>
+      <div class="band__nav"><a class="link" href="#">Shop</a><a class="link" href="#">Lookbook</a><a class="link" href="#">Info</a></div></div>
+    <div class="info__body"><div class="info__inner">
+      <h1 class="info__title">Info</h1>
+      <div class="rte"><p>WHANE. Berlin. Limited, numbered drops.<br>Reduction to the essential — nothing more than necessary.</p>
+      <p>Est. MMXXVI · hello@whane.com</p></div>
+    </div></div>
   </div></div>
 
 </div>
-<script src="../assets/drop-countdown.js"></script>
+<script src="../assets/carousel.js"></script>
 </body>
 </html>

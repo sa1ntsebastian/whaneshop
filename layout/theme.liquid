@@ -30,8 +30,6 @@
     {{ content_for_header }}
 
     {{ 'whane.css' | asset_url | stylesheet_tag }}
-
-    <script src="{{ 'drop-countdown.js' | asset_url }}" defer="defer"></script>
   </head>
 
   <body class="template-{{ request.page_type | handle }}">

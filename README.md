@@ -2,68 +2,77 @@
 
 A radically reduced streetwear storefront. Two colors only — **Cobalt `#1B2BC4`**
 on **White `#FFFFFF`** — a condensed display wordmark (**`WHANE.`**), monospace
-meta type, flat/square/no-shadow surfaces, and generous intentional whitespace.
+meta type, flat/square/no-shadow surfaces, generous intentional whitespace.
 
-This theme implements the **three homepage directions** from the design handoff
-as interchangeable OS 2.0 templates so the brand can compare and pick.
+**Every page fills the screen exactly — no scrolling.**
 
-## The three directions
+## The four pages
 
-| Template | Direction | Assign in admin as |
+| Page | Template | Notes |
 |---|---|---|
-| `templates/index.json` | **01 — Maximal reduziert** (gallery): giant wordmark, one product, minimal nav | *default homepage* |
-| `templates/index.drop.json` | **02 — Drop-fokussiert** (scarcity): the homepage *is* the current drop — availability bar + live countdown + reserve | assign a page/home to template `index.drop` |
-| `templates/index.lookbook.json` | **03 — Editorial / Lookbook**: full-bleed on-figure image, sparse white overlay, hidden shop entrance | assign to template `index.lookbook` |
+| **Home** | `templates/index.json` (section `wordmark-hero`) | Giant `WHANE.` on white, minimal nav (Shop · Lookbook · Info), a single **„Zum Shop"** button. No menu band. |
+| **Shop / Drops** | `templates/page.drops.json` (section `drop-shop`) | Full-screen **product carousel** — click ← → or **swipe** between products. **No countdown**; scarcity shown as a live **stock counter** (`available / limited`) + bar. |
+| **Lookbook** | `templates/page.lookbook.json` (section `editorial-lookbook`) | Full-bleed on-figure image, sparse white overlay, menu band in white. |
+| **Info** | `templates/page.info.json` (section `info`) | Sparse page content, menu band. |
 
-To switch the live homepage, change which `index*` template is active
-(Online Store → Themes → Customize, or set the home page's template), or copy a
-variant's sections into `index.json`.
+The **menu band** (wordmark + Shop · Lookbook · Info) appears on **every page
+except the homepage** — including product / collection / cart / 404.
+
+### Set it up in Shopify
+1. Create three **Pages** in admin and assign their templates:
+   - Page "Shop" → template **`page.drops`**
+   - Page "Lookbook" → template **`page.lookbook`**
+   - Page "Info" → template **`page.info`**
+2. **Theme settings → Navigation:** point the three links at those pages
+   (defaults: `/pages/shop`, `/pages/lookbook`, `/pages/info`).
+3. **Shop section:** in the theme editor, pick the **Drop collection** whose
+   products fill the carousel.
 
 ### Local preview (no Shopify needed)
-Open `preview/index.html` in a browser — it renders all three directions at
-1440px desktop width using the real Druk Condensed font and the live countdown.
+Open `preview/index.html` in a browser — all four pages at 1440px desktop width
+with the real Druk Condensed font; the shop carousel arrows/swipe work live.
 
 ## Structure
 ```
-assets/    whane.css · drop-countdown.js · DrukCondLCGSuper(.ttf/Italic)
+assets/    whane.css · carousel.js · DrukCondLCGSuper(.ttf/Italic)
 layout/    theme.liquid
-sections/  wordmark-hero · drop-hero · editorial-lookbook
+snippets/  menu-band.liquid            (shared header, default + white overlay)
+sections/  wordmark-hero · drop-shop · editorial-lookbook · info
            whane-header · minimal-footer
            main-product · main-collection · main-cart · main-page · main-404
-templates/ index · index.drop · index.lookbook · product · collection · cart · page · 404
+templates/ index · page.drops · page.lookbook · page.info
+           product · collection · cart · page · 404
 config/    settings_schema.json · settings_data.json
 locales/   en.default.json
 ```
 
 ## Brand rules enforced in `assets/whane.css`
-- Colors come from theme settings (`color_cobalt`, `color_white`) — no third color.
-- `border-radius:0` and `box-shadow:none` are forced globally.
+- Colors from theme settings (`color_cobalt`, `color_white`) — no third color.
+- `border-radius:0` and `box-shadow:none` forced globally.
 - Display face: **Druk Condensed** via `@font-face` (licensed files included),
   **Anton** (Google Fonts) as metric fallback. Body/meta: `Courier New` monospace.
-- The diagonal stripe texture (`.whane-placeholder--*`) is **only** an
-  image placeholder; it disappears once real photography is added.
+- Diagonal stripe texture (`.whane-placeholder--*`) is only an image placeholder;
+  it disappears once real photography is added.
+- Full-screen sections use `height:100vh; overflow:hidden` so pages never scroll.
 
-## Drop data — metafields (namespace `custom`)
-The Drop hero and product page read these where present, with section settings
-as fallbacks so it renders before metafields exist:
-
-| Metafield | Type | Purpose |
-|---|---|---|
-| `custom.drop_number` | single line text | e.g. `01` |
-| `custom.drop_date` | single line text | label, e.g. `24.06.26` |
-| `custom.drop_closes_at` | date & time | drives the live countdown |
-| `custom.limited_to` | integer | the drop's cap, e.g. `100` |
-
-- **Availability:** `available` is summed from tracked variant inventory when
-  inventory is managed; otherwise the section's *Available (fallback)* setting.
-- **Scarcity bar** width = `(limited_to − available) / limited_to` (fills as it sells).
-- **Countdown:** `assets/drop-countdown.js` reads `data-closes-at` (ISO datetime),
-  ticks every second as `HH:MM:SS`, clamps at `00:00:00`. With no close time set
-  it falls back to a demo window so the interaction is visible in the editor.
+## Shop carousel & scarcity
+- Products come from the section's **Drop collection** setting.
+- Navigation: prev/next arrows, native touch **swipe** (CSS scroll-snap),
+  ← → keyboard, and a live **`NN / TOTAL`** counter — all in `assets/carousel.js`.
+- **Stock counter:** `available` is summed from tracked variant inventory; if a
+  product isn't inventory-tracked it falls back to the section setting.
+- **Bar** width = `(limited_to − available) / limited_to` (fills as it sells out).
 - **Sold out** is shown struck-through, never hidden (scarcity is the story).
 
+### Drop metafields (namespace `custom`)
+| Metafield | Type | Purpose |
+|---|---|---|
+| `custom.drop_number` | single line text | e.g. `01` (eyebrow on each slide) |
+| `custom.limited_to` | integer | the drop cap, e.g. `100` |
+
+(`drop_closes_at` is no longer used — the countdown was removed.)
+
 ## Notes
-- Imagery is placeholder (striped texture). Add real photos via the section image
-  pickers / product images: one studio still (Dir 01), one drop shot (Dir 02),
-  one full-body on-figure shot (Dir 03).
+- Imagery is placeholder (striped texture). Add real product images (carousel)
+  and a full-body shot (lookbook image picker).
 - Druk Condensed is a Commercial Type license — the supplied files ship in `assets/`.

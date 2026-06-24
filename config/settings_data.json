@@ -3,14 +3,21 @@
     "color_cobalt": "#1B2BC4",
     "color_white": "#FFFFFF",
     "wordmark": "WHANE.",
-    "default_drop_number": "01"
+    "nav_shop_label": "Shop",
+    "nav_shop_link": "/pages/shop",
+    "nav_lookbook_label": "Lookbook",
+    "nav_lookbook_link": "/pages/lookbook",
+    "nav_info_label": "Info",
+    "nav_info_link": "/pages/info"
   },
   "presets": {
     "WHANE": {
       "color_cobalt": "#1B2BC4",
       "color_white": "#FFFFFF",
       "wordmark": "WHANE.",
-      "default_drop_number": "01"
+      "nav_shop_label": "Shop",
+      "nav_lookbook_label": "Lookbook",
+      "nav_info_label": "Info"
     }
   }
 }

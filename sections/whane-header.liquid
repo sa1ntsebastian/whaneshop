@@ -1,19 +1,9 @@
-{%- comment -%} Minimal shared header for inner pages (product, collection, cart, …). {%- endcomment -%}
-<header class="whane-header">
-  <a href="{{ routes.root_url }}" class="whane-header__wordmark">{{ settings.wordmark | escape }}</a>
-  <nav class="whane-header__nav">
-    {%- for link in section.settings.menu.links -%}
-      <a class="whane-link" href="{{ link.url }}" style="font-size:12px;">{{ link.title | escape }}</a>
-    {%- endfor -%}
-    <a class="whane-link" href="{{ routes.cart_url }}" style="font-size:12px;">Cart ({{ cart.item_count }})</a>
-  </nav>
-</header>
+{%- comment -%} Inner-page header — renders the shared menu band. {%- endcomment -%}
+{% render 'menu-band' %}
 
 {% schema %}
 {
   "name": "Header",
-  "settings": [
-    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" }
-  ]
+  "settings": []
 }
 {% endschema %}

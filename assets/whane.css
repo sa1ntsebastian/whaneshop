@@ -142,11 +142,13 @@ button { font-family: inherit; cursor: pointer; }
    Section: Wordmark hero (Direction 01 — Gallery)
    ========================================================================== */
 .wordmark-hero {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   background: var(--white);
 }
+.wordmark-hero__cta { margin-top: 56px; }
 .wordmark-hero__header,
 .wordmark-hero__footer {
   display: flex;
@@ -252,7 +254,7 @@ button { font-family: inherit; cursor: pointer; }
 /* ==========================================================================
    Section: Editorial lookbook (Direction 03)
    ========================================================================== */
-.lookbook { position: relative; min-height: 100vh; overflow: hidden; background: var(--cobalt); }
+.lookbook { position: relative; height: 100vh; overflow: hidden; background: var(--cobalt); }
 .lookbook__media { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
 .lookbook__media img { width: 100%; height: 100%; object-fit: cover; }
 .lookbook__media-note { font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.65); text-transform: uppercase; }
@@ -342,6 +344,101 @@ button { font-family: inherit; cursor: pointer; }
 .whane-rte h1, .whane-rte h2, .whane-rte h3 { font-family: var(--font-display); text-transform: uppercase; letter-spacing: -1px; }
 
 /* ==========================================================================
+   Outline button (homepage "Zum Shop")
+   ========================================================================== */
+.whane-btn--outline {
+  display: inline-block;
+  width: auto;
+  background: var(--white);
+  color: var(--cobalt);
+  border: 1px solid var(--cobalt);
+  padding: 18px 48px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: background 120ms linear, color 120ms linear;
+}
+.whane-btn--outline:hover { background: var(--cobalt); color: var(--white); }
+
+/* ==========================================================================
+   Menu band — shared header on every page except the homepage
+   ========================================================================== */
+.menu-band {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px var(--pad-x);
+  border-bottom: 1px solid var(--cobalt);
+  background: var(--white);
+  flex: 0 0 auto;
+}
+.menu-band__wordmark { font-family: var(--font-display); font-size: 26px; text-transform: uppercase; color: var(--cobalt); }
+.menu-band__nav { display: flex; gap: 36px; align-items: center; }
+.menu-band--overlay {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 4;
+  background: transparent; border-bottom: 0;
+}
+.menu-band--on-cobalt .menu-band__wordmark { color: var(--white); }
+.menu-band--on-cobalt .whane-link { color: var(--white); }
+.menu-band--on-cobalt .whane-link:hover { border-bottom-color: var(--white); }
+
+/* ==========================================================================
+   Shop / Drops — full-screen product carousel (left/right + swipe)
+   No countdown; scarcity shown as a live count + bar.
+   ========================================================================== */
+.shop { height: 100vh; overflow: hidden; display: flex; flex-direction: column; background: var(--white); }
+.shop__viewport { flex: 1; min-height: 0; position: relative; }
+.shop__track {
+  display: flex;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.shop__track::-webkit-scrollbar { display: none; }
+.shop__slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; display: flex; }
+.shop__media { width: 56%; border-right: 1px solid var(--cobalt); position: relative; overflow: hidden; }
+.shop__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.shop__media-caption { position: absolute; left: 40px; bottom: 40px; color: var(--white); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+.shop__info { width: 44%; padding: 56px 64px; display: flex; flex-direction: column; justify-content: center; }
+.shop__eyebrow { font-size: 12px; letter-spacing: 3px; }
+.shop__title { font-family: var(--font-display); font-size: 88px; line-height: 0.86; letter-spacing: -2px; text-transform: uppercase; color: var(--cobalt); margin: 14px 0 0; }
+.shop__spec { font-size: 13px; letter-spacing: 1px; margin-top: 24px; }
+.shop__avail { margin-top: 36px; }
+.shop__count { font-family: var(--font-display); font-size: 52px; line-height: 1; color: var(--cobalt); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.shop__count small { font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; }
+.shop__bar { height: 10px; border: 1px solid var(--cobalt); margin-top: 16px; }
+.shop__bar-fill { height: 100%; background: var(--cobalt); }
+.shop__cta { margin-top: 32px; max-width: 320px; }
+.shop__soldout { font-size: 11px; letter-spacing: 2px; margin-top: 22px; text-decoration: line-through; }
+.shop__arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 54px; height: 54px; z-index: 3;
+  border: 1px solid var(--cobalt); background: var(--white); color: var(--cobalt);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 20px; line-height: 1;
+  transition: background 120ms linear, color 120ms linear;
+}
+.shop__arrow:hover { background: var(--cobalt); color: var(--white); }
+.shop__arrow[disabled] { opacity: 0.25; cursor: not-allowed; }
+.shop__arrow--prev { left: 24px; }
+.shop__arrow--next { right: 24px; }
+.shop__counter { position: absolute; left: var(--pad-x); bottom: 28px; z-index: 3; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--cobalt); text-transform: uppercase; pointer-events: none; }
+.shop__empty { flex: 1; display: flex; align-items: center; justify-content: center; }
+
+/* ==========================================================================
+   Info — full-screen, sparse, no scroll
+   ========================================================================== */
+.info { height: 100vh; overflow: hidden; display: flex; flex-direction: column; background: var(--white); }
+.info__body { flex: 1; min-height: 0; overflow: hidden; padding: 0 var(--pad-x); display: flex; }
+.info__inner { margin: auto 0; max-width: 760px; }
+.info__title { font-family: var(--font-display); font-size: 96px; line-height: 0.86; letter-spacing: -2px; text-transform: uppercase; margin: 0 0 28px; }
+
+/* ==========================================================================
    Responsive — keep it calm; stack the two-column layouts
    ========================================================================== */
 @media (max-width: 999px) {
@@ -358,6 +455,15 @@ button { font-family: inherit; cursor: pointer; }
   .whane-product__title { font-size: 52px; }
   .whane-grid { grid-template-columns: repeat(2, 1fr); }
   .whane-collection__title, .whane-cart__title { font-size: 56px; }
+
+  .shop__slide { flex-direction: column; }
+  .shop__media { width: 100%; height: 45%; border-right: 0; border-bottom: 1px solid var(--cobalt); }
+  .shop__info { width: 100%; height: 55%; padding: 32px 28px; justify-content: flex-start; overflow: hidden; }
+  .shop__title { font-size: 56px; }
+  .shop__count { font-size: 40px; }
+  .info__title { font-size: 56px; }
+  .menu-band { padding: 24px 28px; }
+  .menu-band__nav { gap: 20px; }
 }
 @media (max-width: 599px) {
   .wordmark-hero__wordmark { font-size: 72px; }

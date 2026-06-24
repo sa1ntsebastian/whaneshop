@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "shop": {
+      "type": "drop-shop",
+      "settings": {
+        "eyebrow": "The current drop",
+        "cta_label": "Reserve",
+        "sold_out_label": "Sold out",
+        "fallback_available": "37"
+      }
+    }
+  },
+  "order": ["shop"]
+}

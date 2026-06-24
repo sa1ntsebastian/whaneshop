@@ -1,0 +1,128 @@
+{%- comment -%}
+  Shop / Drops — full-screen product carousel.
+  Browse products left/right (arrows) or swipe. No countdown — scarcity is
+  shown as a live availability count + bar. Products come from a collection.
+{%- endcomment -%}
+
+{%- liquid
+  assign collection = collections[section.settings.collection]
+  assign products = collection.products
+-%}
+
+<section class="shop" data-carousel>
+  {% render 'menu-band' %}
+
+  <div class="shop__viewport">
+    {%- if products.size > 0 -%}
+      <button type="button" class="shop__arrow shop__arrow--prev" aria-label="Previous product">&larr;</button>
+      <button type="button" class="shop__arrow shop__arrow--next" aria-label="Next product">&rarr;</button>
+      <span class="shop__counter" aria-hidden="true">01 / {{ products.size }}</span>
+
+      <div class="shop__track" tabindex="0" aria-label="Products">
+        {%- for product in products -%}
+          {%- liquid
+            assign drop_number = product.metafields.custom.drop_number.value
+
+            assign limited_to = 0
+            if product.metafields.custom.limited_to != blank
+              assign limited_to = product.metafields.custom.limited_to.value | plus: 0
+            endif
+
+            assign available = 0
+            assign has_tracked = false
+            for variant in product.variants
+              if variant.inventory_management != blank
+                assign has_tracked = true
+                assign available = available | plus: variant.inventory_quantity
+              endif
+            endfor
+            unless has_tracked
+              assign available = section.settings.fallback_available | plus: 0
+            endunless
+            if available < 0
+              assign available = 0
+            endif
+
+            assign sold = limited_to | minus: available
+            assign fill_pct = 0
+            if limited_to > 0
+              assign fill_pct = sold | times: 100 | divided_by: limited_to
+              if fill_pct < 0
+                assign fill_pct = 0
+              endif
+              if fill_pct > 100
+                assign fill_pct = 100
+              endif
+            endif
+          -%}
+          <article class="shop__slide">
+            <div class="shop__media {% unless product.featured_image %}whane-placeholder--on-cobalt{% endunless %}">
+              {%- if product.featured_image -%}
+                {{ product.featured_image | image_url: width: 1600 | image_tag: alt: product.title, loading: 'lazy', sizes: '56vw', widths: '600,900,1400,1600,2000' }}
+              {%- endif -%}
+              <span class="shop__media-caption">{{ product.title | escape }}</span>
+            </div>
+
+            <div class="shop__info">
+              <span class="shop__eyebrow whane-meta">
+                {%- if drop_number != blank -%}Drop {{ drop_number }}{%- else -%}{{ section.settings.eyebrow | escape }}{%- endif -%}
+              </span>
+
+              <h2 class="shop__title">{{ product.title | escape }}</h2>
+              <span class="shop__spec whane-meta">{{ product.price | money }}</span>
+
+              {%- if limited_to > 0 -%}
+                <div class="shop__avail">
+                  <span class="whane-meta" style="font-size:12px; letter-spacing:2px;">Available</span>
+                  <div class="shop__count">{{ available }}<small> / {{ limited_to }} · Limited to {{ limited_to }}</small></div>
+                  <div class="shop__bar" role="progressbar" aria-valuenow="{{ fill_pct }}" aria-valuemin="0" aria-valuemax="100" aria-label="Claimed">
+                    <div class="shop__bar-fill" style="width: {{ fill_pct }}%;"></div>
+                  </div>
+                </div>
+              {%- endif -%}
+
+              {%- if product.available and available > 0 -%}
+                {%- form 'product', product, class: 'shop__cta' -%}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <button type="submit" name="add" class="whane-btn">{{ section.settings.cta_label | escape }}</button>
+                {%- endform -%}
+              {%- else -%}
+                <button type="button" class="whane-btn shop__cta" aria-disabled="true" disabled>{{ section.settings.sold_out_label | escape }}</button>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="shop__empty">
+        <p class="whane-meta" style="font-size:13px;">
+          {%- if section.settings.collection == blank -%}
+            Select a collection in the theme editor.
+          {%- else -%}
+            No products in this drop yet.
+          {%- endif -%}
+        </p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script src="{{ 'carousel.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Shop / Drops",
+  "tag": "section",
+  "class": "section-shop",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Drop collection", "info": "Products shown in the carousel." },
+    { "type": "header", "content": "Copy" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (when no drop number)", "default": "The current drop" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Reserve" },
+    { "type": "text", "id": "sold_out_label", "label": "Sold-out label", "default": "Sold out" },
+    { "type": "header", "content": "Scarcity" },
+    { "type": "text", "id": "fallback_available", "label": "Available (fallback)", "default": "37", "info": "Used only when a product has no tracked inventory." }
+  ],
+  "presets": [{ "name": "Shop / Drops" }]
+}
+{% endschema %}
