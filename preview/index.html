@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WHANE — Homepage directions (desktop preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+  /* Real licensed display face, with Anton as metric fallback */
+  @font-face{
+    font-family:"Druk Condensed";
+    src:url("../assets/DrukCondLCGSuper.ttf") format("truetype");
+    font-weight:900; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:"Druk Condensed";
+    src:url("../assets/DrukCondLCGSuperItalic.ttf") format("truetype");
+    font-weight:900; font-style:italic; font-display:swap;
+  }
+  :root{ --cobalt:#1B2BC4; --white:#FFFFFF;
+    --display:"Druk Condensed","Anton",sans-serif; --mono:"Courier New",monospace; }
+  *,*::before,*::after{box-sizing:border-box;border-radius:0;}
+  body{margin:0;background:#e9e9ef;font-family:var(--mono);color:var(--cobalt);}
+  .lab{font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--cobalt);text-transform:uppercase;margin:40px 0 14px;}
+  .frame{width:1440px;height:960px;background:var(--white);overflow:hidden;margin:0 auto;}
+  .wrap{width:1440px;margin:0 auto;padding-bottom:80px;}
+  .meta{font-family:var(--mono);text-transform:uppercase;letter-spacing:2px;color:var(--cobalt);}
+
+  /* Dir 01 */
+  .d1{height:100%;display:flex;flex-direction:column;}
+  .d1 .hd{display:flex;justify-content:space-between;align-items:center;padding:40px 56px;}
+  .d1 .nav{display:flex;gap:36px;}
+  .d1 .main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 56px;}
+  .d1 .word{font-family:var(--display);font-size:240px;line-height:.82;letter-spacing:-4px;color:var(--cobalt);text-transform:uppercase;}
+  .d1 .prod{display:flex;flex-direction:column;align-items:center;margin-top:64px;}
+  .d1 .shot{width:196px;height:266px;border:1px solid var(--cobalt);display:flex;align-items:center;justify-content:center;
+    background:repeating-linear-gradient(135deg,#fff 0 14px,rgba(27,43,196,.06) 14px 15px);}
+  .d1 .ft{display:flex;justify-content:space-between;align-items:center;padding:32px 56px;border-top:1px solid var(--cobalt);}
+
+  /* Dir 02 */
+  .d2{height:100%;display:flex;flex-direction:column;}
+  .d2 .hd{display:flex;justify-content:space-between;align-items:center;padding:32px 56px;border-bottom:1px solid var(--cobalt);}
+  .d2 .word{font-family:var(--display);font-size:26px;color:var(--cobalt);text-transform:uppercase;}
+  .d2 .body{flex:1;display:flex;}
+  .d2 .media{width:56%;border-right:1px solid var(--cobalt);display:flex;align-items:flex-end;padding:40px;
+    background:repeating-linear-gradient(135deg,var(--cobalt) 0 17px,rgba(255,255,255,.10) 17px 19px);}
+  .d2 .info{width:44%;padding:64px 64px 56px;display:flex;flex-direction:column;justify-content:center;}
+  .d2 .title{font-family:var(--display);font-size:96px;line-height:.86;letter-spacing:-2px;color:var(--cobalt);text-transform:uppercase;margin:14px 0 0;}
+  .d2 .bar{height:10px;border:1px solid var(--cobalt);margin-top:12px;}
+  .d2 .fill{height:100%;width:63%;background:var(--cobalt);}
+  .d2 .timer{font-family:var(--display);font-size:52px;line-height:1;letter-spacing:1px;color:var(--cobalt);margin-top:6px;font-variant-numeric:tabular-nums;}
+  .d2 .cta{background:var(--cobalt);color:#fff;text-align:center;padding:20px;margin-top:36px;font-family:var(--mono);font-size:13px;letter-spacing:3px;text-transform:uppercase;}
+
+  /* Dir 03 */
+  .d3{height:100%;position:relative;background:repeating-linear-gradient(135deg,var(--cobalt) 0 19px,rgba(255,255,255,.09) 19px 21px);}
+  .d3 .top{position:absolute;top:40px;left:56px;right:56px;display:flex;justify-content:space-between;align-items:flex-start;color:#fff;}
+  .d3 .word{font-family:var(--display);font-size:30px;color:#fff;text-transform:uppercase;}
+  .d3 .bot{position:absolute;bottom:48px;left:56px;right:56px;display:flex;justify-content:space-between;align-items:flex-end;}
+  .d3 .head{font-family:var(--display);font-size:64px;line-height:.9;letter-spacing:-1px;color:#fff;text-transform:uppercase;margin:0;}
+  .d3 .enter{font-family:var(--mono);font-size:12px;letter-spacing:3px;color:#fff;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:4px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="lab">01 — Maximal reduziert · Galerie</div>
+  <div class="frame"><div class="d1">
+    <div class="hd"><span class="meta" style="font-size:12px">Est. MMXXVI</span>
+      <div class="nav"><span class="meta" style="font-size:12px">Shop</span><span class="meta" style="font-size:12px">Info</span></div></div>
+    <div class="main"><div class="word">WHANE.</div>
+      <div class="prod"><div class="shot"><span class="meta" style="font-size:10px;text-align:center;line-height:1.6">product<br>shot</span></div>
+        <span class="meta" style="font-size:11px;margin-top:18px">Object 01 · Limited to 50</span></div></div>
+    <div class="ft"><span class="meta" style="font-size:11px">© WHANE</span><span class="meta" style="font-size:11px">Berlin</span></div>
+  </div></div>
+
+  <div class="lab">02 — Drop-fokussiert · Knappheit</div>
+  <div class="frame"><div class="d2">
+    <div class="hd"><span class="word">WHANE.</span><span class="meta" style="font-size:12px">Drop 01 · 24.06.26</span></div>
+    <div class="body">
+      <div class="media"><span class="meta" style="font-size:11px;color:#fff">Product shot · Field jacket — front</span></div>
+      <div class="info">
+        <span class="meta" style="font-size:12px;letter-spacing:3px">The current drop</span>
+        <div class="title">Drop<br>01</div>
+        <div class="meta" style="font-size:13px;letter-spacing:1px;margin-top:28px">Field Jacket / Cobalt — €280</div>
+        <div style="margin-top:40px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <span class="meta" style="font-size:12px">37 / 100 available</span><span class="meta" style="font-size:12px">Limited to 100</span></div>
+          <div class="bar"><div class="fill"></div></div></div>
+        <div style="margin-top:36px"><span class="meta" style="font-size:12px;letter-spacing:3px">Drop closes in</span>
+          <div class="timer js-drop-countdown" data-fallback-seconds="172333">00:00:00</div></div>
+        <div class="cta">Reserve</div>
+        <span class="meta" style="font-size:11px;margin-top:28px;text-decoration:line-through">Drop 00 · Field Cap — Sold out</span>
+      </div></div>
+  </div></div>
+
+  <div class="lab">03 — Editorial · Lookbook</div>
+  <div class="frame"><div class="d3">
+    <div class="top"><span class="word">WHANE.</span><span class="meta" style="font-size:11px;color:#fff">MMXXVI</span></div>
+    <div class="bot">
+      <div><h1 class="head">Autumn<br>Field</h1><span class="meta" style="font-size:11px;color:#fff;display:block;margin-top:16px">Look 01 / 06</span></div>
+      <span class="enter">Enter shop →</span></div>
+  </div></div>
+
+</div>
+<script src="../assets/drop-countdown.js"></script>
+</body>
+</html>

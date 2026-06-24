@@ -1,0 +1,16 @@
+{
+  "current": {
+    "color_cobalt": "#1B2BC4",
+    "color_white": "#FFFFFF",
+    "wordmark": "WHANE.",
+    "default_drop_number": "01"
+  },
+  "presets": {
+    "WHANE": {
+      "color_cobalt": "#1B2BC4",
+      "color_white": "#FFFFFF",
+      "wordmark": "WHANE.",
+      "default_drop_number": "01"
+    }
+  }
+}

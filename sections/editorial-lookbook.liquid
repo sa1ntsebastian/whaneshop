@@ -1,0 +1,51 @@
+{%- comment -%}
+  Direction 03 — "Editorial / Lookbook"
+  Mood over selling. Full-bleed on-figure image; sparse white overlay text.
+  The shop hides behind the image via the "Enter shop" link.
+{%- endcomment -%}
+
+<section class="lookbook">
+  <div class="lookbook__media {% unless section.settings.image %}whane-placeholder--on-cobalt{% endunless %}">
+    {%- if section.settings.image -%}
+      {{ section.settings.image | image_url: width: 2000 | image_tag: alt: section.settings.heading, loading: 'eager', sizes: '100vw', widths: '800,1200,1600,2000,2600' }}
+    {%- else -%}
+      <span class="lookbook__media-note">Full-body look · on-figure shot</span>
+    {%- endif -%}
+  </div>
+
+  <div class="lookbook__top">
+    <a href="{{ routes.root_url }}" class="lookbook__wordmark">{{ settings.wordmark | escape }}</a>
+    <span class="whane-meta lookbook__looknum" style="margin-top:0;">{{ section.settings.year_label | escape }}</span>
+  </div>
+
+  <div class="lookbook__bottom">
+    <div>
+      <h1 class="lookbook__heading">{{ section.settings.heading | escape | newline_to_br }}</h1>
+      {%- if section.settings.look_number != blank -%}
+        <span class="lookbook__looknum whane-meta">{{ section.settings.look_number | escape }}</span>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.cta_label != blank -%}
+      <a class="lookbook__enter whane-link whane-link--on-cobalt" href="{{ section.settings.cta_url | default: routes.all_products_collection_url }}">
+        {{ section.settings.cta_label | escape }} →
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial lookbook",
+  "tag": "section",
+  "class": "section-lookbook",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Full-bleed image", "info": "Full-body on-figure shot." },
+    { "type": "text", "id": "year_label", "label": "Top-right label", "default": "MMXXVI" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Autumn\nField", "info": "Line breaks become two lines." },
+    { "type": "text", "id": "look_number", "label": "Look number", "default": "Look 01 / 06" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Enter shop" },
+    { "type": "url", "id": "cta_url", "label": "CTA link (the hidden shop entrance)" }
+  ],
+  "presets": [{ "name": "Editorial lookbook" }]
+}
+{% endschema %}

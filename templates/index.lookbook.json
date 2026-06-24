@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "lookbook": {
+      "type": "editorial-lookbook",
+      "settings": {
+        "year_label": "MMXXVI",
+        "heading": "Autumn\nField",
+        "look_number": "Look 01 / 06",
+        "cta_label": "Enter shop"
+      }
+    }
+  },
+  "order": ["lookbook"]
+}

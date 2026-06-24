@@ -1,0 +1,368 @@
+/* ==========================================================================
+   WHANE — base theme stylesheet
+   Two-color system only: Cobalt (#1B2BC4) + White (#FFFFFF).
+   Flat, square corners, no shadows, no gradients, editorial.
+   ========================================================================== */
+
+/* ---- Fonts ---------------------------------------------------------------
+   Druk Condensed Super (licensed, supplied by brand) is the display face.
+   Anton (Google Fonts) is loaded in theme.liquid as a metric-compatible
+   fallback for any glyphs / weights Druk does not cover.                    */
+@font-face {
+  font-family: "Druk Condensed";
+  src: url("{{ 'DrukCondLCGSuper.ttf' | asset_url }}") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Druk Condensed";
+  src: url("{{ 'DrukCondLCGSuperItalic.ttf' | asset_url }}") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ---- Tokens -------------------------------------------------------------- */
+:root {
+  --cobalt: {{ settings.color_cobalt }};
+  --white:  {{ settings.color_white }};
+  --font-display: "Druk Condensed", "Anton", sans-serif;
+  --font-mono: "Courier New", ui-monospace, monospace;
+  --pad-x: 56px;
+  --hairline-on-white: rgba(27, 43, 196, 0.06);
+  --hairline-on-cobalt: rgba(255, 255, 255, 0.10);
+}
+
+/* ---- Reset --------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--cobalt);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+
+/* Square corners + no shadows globally — brand rule. */
+*, *::before, *::after { border-radius: 0 !important; box-shadow: none !important; }
+
+/* ---- Reusable type ------------------------------------------------------- */
+.whane-display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 900;
+  color: var(--cobalt);
+  margin: 0;
+}
+.whane-meta {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--cobalt);
+  margin: 0;
+}
+
+/* ---- Visually hidden (a11y) --------------------------------------------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+.skip-to-content:focus {
+  position: fixed; top: 8px; left: 8px; z-index: 1000;
+  background: var(--cobalt); color: var(--white);
+  padding: 10px 16px; font-family: var(--font-mono);
+  letter-spacing: 2px; text-transform: uppercase;
+}
+
+/* ---- Image placeholder texture (vanishes once real photos are added) ---- */
+.whane-placeholder--on-white {
+  background: repeating-linear-gradient(135deg,
+    var(--white) 0 14px, var(--hairline-on-white) 14px 15px);
+  border: 1px solid var(--cobalt);
+}
+.whane-placeholder--on-cobalt {
+  background: repeating-linear-gradient(135deg,
+    var(--cobalt) 0 17px, var(--hairline-on-cobalt) 17px 19px);
+}
+
+/* ---- Flat button --------------------------------------------------------- */
+.whane-btn {
+  display: inline-block;
+  background: var(--cobalt);
+  color: var(--white);
+  border: 1px solid var(--cobalt);
+  text-align: center;
+  padding: 20px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  width: 100%;
+  transition: background 120ms linear, color 120ms linear;
+}
+.whane-btn:hover {
+  background: var(--white);
+  color: var(--cobalt);
+}
+.whane-btn:disabled,
+.whane-btn[aria-disabled="true"] {
+  background: var(--white);
+  color: var(--cobalt);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+/* ---- Inline link with hover underline ----------------------------------- */
+.whane-link {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--cobalt);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 120ms linear;
+}
+.whane-link:hover { border-bottom-color: var(--cobalt); }
+.whane-link--on-cobalt { color: var(--white); }
+.whane-link--on-cobalt:hover { border-bottom-color: var(--white); }
+
+/* ---- Shared page shell --------------------------------------------------- */
+.whane-page { padding: 56px var(--pad-x) 96px; }
+
+/* ==========================================================================
+   Section: Wordmark hero (Direction 01 — Gallery)
+   ========================================================================== */
+.wordmark-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+}
+.wordmark-hero__header,
+.wordmark-hero__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wordmark-hero__header { padding: 40px var(--pad-x); }
+.wordmark-hero__footer { padding: 32px var(--pad-x); border-top: 1px solid var(--cobalt); }
+.wordmark-hero__nav { display: flex; gap: 36px; }
+.wordmark-hero__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px var(--pad-x);
+}
+.wordmark-hero__wordmark {
+  font-family: var(--font-display);
+  font-size: 240px;
+  line-height: 0.82;
+  letter-spacing: -4px;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  text-align: center;
+}
+.wordmark-hero__product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 64px;
+}
+.wordmark-hero__shot {
+  width: 196px;
+  height: 266px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.wordmark-hero__shot img { width: 100%; height: 100%; object-fit: cover; }
+.wordmark-hero__caption { margin-top: 18px; font-size: 11px; letter-spacing: 2px; }
+
+/* ==========================================================================
+   Section: Drop hero (Direction 02 — Scarcity)
+   ========================================================================== */
+.drop-hero { display: flex; flex-direction: column; min-height: 100vh; background: var(--white); }
+.drop-hero__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px var(--pad-x);
+  border-bottom: 1px solid var(--cobalt);
+}
+.drop-hero__wordmark { font-family: var(--font-display); font-size: 26px; text-transform: uppercase; color: var(--cobalt); }
+.drop-hero__body { flex: 1; display: flex; }
+.drop-hero__media {
+  width: 56%;
+  border-right: 1px solid var(--cobalt);
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+  overflow: hidden;
+  position: relative;
+}
+.drop-hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.drop-hero__media-caption { position: relative; color: var(--white); font-size: 11px; letter-spacing: 2px; }
+.drop-hero__info {
+  width: 44%;
+  padding: 64px 64px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.drop-hero__eyebrow { font-size: 12px; letter-spacing: 3px; }
+.drop-hero__title {
+  font-family: var(--font-display);
+  font-size: 96px;
+  line-height: 0.86;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  margin: 14px 0 0;
+}
+.drop-hero__spec { font-size: 13px; letter-spacing: 1px; margin-top: 28px; }
+.drop-hero__avail { margin-top: 40px; }
+.drop-hero__avail-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; letter-spacing: 2px; }
+.drop-hero__bar { height: 10px; border: 1px solid var(--cobalt); margin-top: 12px; }
+.drop-hero__bar-fill { height: 100%; background: var(--cobalt); }
+.drop-hero__countdown { margin-top: 36px; }
+.drop-hero__timer {
+  font-family: var(--font-display);
+  font-size: 52px;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: var(--cobalt);
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.drop-hero__cta { margin-top: 36px; }
+.drop-hero__soldout { font-size: 11px; letter-spacing: 2px; margin-top: 28px; text-decoration: line-through; }
+
+/* ==========================================================================
+   Section: Editorial lookbook (Direction 03)
+   ========================================================================== */
+.lookbook { position: relative; min-height: 100vh; overflow: hidden; background: var(--cobalt); }
+.lookbook__media { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.lookbook__media img { width: 100%; height: 100%; object-fit: cover; }
+.lookbook__media-note { font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.65); text-transform: uppercase; }
+.lookbook__top {
+  position: absolute; top: 40px; left: var(--pad-x); right: var(--pad-x);
+  display: flex; justify-content: space-between; align-items: flex-start;
+  color: var(--white);
+}
+.lookbook__wordmark { font-family: var(--font-display); font-size: 30px; text-transform: uppercase; color: var(--white); }
+.lookbook__bottom {
+  position: absolute; bottom: 48px; left: var(--pad-x); right: var(--pad-x);
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.lookbook__heading {
+  font-family: var(--font-display);
+  font-size: 64px;
+  line-height: 0.9;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 0;
+}
+.lookbook__looknum { color: var(--white); font-size: 11px; letter-spacing: 2px; display: block; margin-top: 16px; }
+.lookbook__enter { color: var(--white); font-size: 12px; letter-spacing: 3px; }
+
+/* ==========================================================================
+   Shared minimal header (inner pages) + footer
+   ========================================================================== */
+.whane-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px var(--pad-x);
+  border-bottom: 1px solid var(--cobalt);
+}
+.whane-header__wordmark { font-family: var(--font-display); font-size: 26px; text-transform: uppercase; color: var(--cobalt); }
+.whane-header__nav { display: flex; gap: 36px; align-items: center; }
+.whane-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px var(--pad-x);
+  border-top: 1px solid var(--cobalt);
+}
+.whane-footer__col { display: flex; gap: 28px; }
+
+/* ==========================================================================
+   Product / collection / cart — kept deliberately sparse
+   ========================================================================== */
+.whane-product { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.whane-product__media { border-right: 1px solid var(--cobalt); min-height: 70vh; position: relative; overflow: hidden; }
+.whane-product__media img { width: 100%; height: 100%; object-fit: cover; }
+.whane-product__info { padding: 64px; display: flex; flex-direction: column; justify-content: center; }
+.whane-product__title { font-family: var(--font-display); font-size: 72px; line-height: 0.86; letter-spacing: -2px; text-transform: uppercase; margin: 0; }
+.whane-product__price { font-size: 14px; letter-spacing: 1px; margin-top: 24px; }
+.whane-product__desc { font-family: var(--font-mono); font-size: 13px; line-height: 1.7; letter-spacing: 0.5px; margin-top: 28px; }
+.whane-product__form { margin-top: 36px; }
+.whane-product__variants { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+.whane-variant {
+  border: 1px solid var(--cobalt);
+  background: var(--white);
+  color: var(--cobalt);
+  padding: 12px 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.whane-variant--active { background: var(--cobalt); color: var(--white); }
+
+.whane-collection { padding: 56px var(--pad-x) 96px; }
+.whane-collection__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 48px; }
+.whane-collection__title { font-family: var(--font-display); font-size: 96px; line-height: 0.86; letter-spacing: -2px; text-transform: uppercase; margin: 0; }
+.whane-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--cobalt); border: 1px solid var(--cobalt); }
+.whane-card { background: var(--white); padding: 28px; display: flex; flex-direction: column; }
+.whane-card__media { aspect-ratio: 3 / 4; overflow: hidden; margin-bottom: 18px; position: relative; }
+.whane-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.whane-card__title { font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+.whane-card__price { font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px; margin-top: 6px; }
+.whane-card__soldout { text-decoration: line-through; }
+
+.whane-cart { padding: 56px var(--pad-x) 96px; }
+.whane-cart__title { font-family: var(--font-display); font-size: 96px; line-height: 0.86; letter-spacing: -2px; text-transform: uppercase; margin: 0 0 40px; }
+.whane-cart__row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--cobalt); align-items: center; font-family: var(--font-mono); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+.whane-cart__foot { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--cobalt); padding-top: 32px; margin-top: 8px; }
+.whane-rte { font-family: var(--font-mono); font-size: 13px; line-height: 1.8; letter-spacing: 0.3px; max-width: 60ch; }
+.whane-rte h1, .whane-rte h2, .whane-rte h3 { font-family: var(--font-display); text-transform: uppercase; letter-spacing: -1px; }
+
+/* ==========================================================================
+   Responsive — keep it calm; stack the two-column layouts
+   ========================================================================== */
+@media (max-width: 999px) {
+  :root { --pad-x: 28px; }
+  .wordmark-hero__wordmark { font-size: 120px; letter-spacing: -2px; }
+  .drop-hero__body { flex-direction: column; }
+  .drop-hero__media,
+  .drop-hero__info { width: 100%; border-right: 0; }
+  .drop-hero__media { min-height: 360px; border-bottom: 1px solid var(--cobalt); }
+  .drop-hero__title { font-size: 64px; }
+  .lookbook__heading { font-size: 44px; }
+  .whane-product { grid-template-columns: 1fr; }
+  .whane-product__media { border-right: 0; border-bottom: 1px solid var(--cobalt); min-height: 50vh; }
+  .whane-product__title { font-size: 52px; }
+  .whane-grid { grid-template-columns: repeat(2, 1fr); }
+  .whane-collection__title, .whane-cart__title { font-size: 56px; }
+}
+@media (max-width: 599px) {
+  .wordmark-hero__wordmark { font-size: 72px; }
+  .drop-hero__title { font-size: 48px; }
+  .lookbook__bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .whane-grid { grid-template-columns: 1fr; }
+  .whane-header__nav { gap: 20px; }
+}

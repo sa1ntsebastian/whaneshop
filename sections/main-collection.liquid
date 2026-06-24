@@ -1,0 +1,35 @@
+{%- comment -%} Collection grid — sold-out kept visible (struck through). {%- endcomment -%}
+<div class="whane-collection">
+  <div class="whane-collection__head">
+    <h1 class="whane-collection__title">{{ collection.title | escape }}</h1>
+    <span class="whane-meta" style="font-size:12px;">{{ collection.products_count }} {% if collection.products_count == 1 %}object{% else %}objects{% endif %}</span>
+  </div>
+
+  {%- if collection.products.size > 0 -%}
+    <div class="whane-grid">
+      {%- for product in collection.products -%}
+        <a class="whane-card" href="{{ product.url }}">
+          <span class="whane-card__media {% unless product.featured_image %}whane-placeholder--on-white{% endunless %}">
+            {%- if product.featured_image -%}
+              {{ product.featured_image | image_url: width: 700 | image_tag: alt: product.title, loading: 'lazy', sizes: '(max-width:999px) 50vw, 33vw', widths: '350,500,700' }}
+            {%- endif -%}
+          </span>
+          <span class="whane-card__title {% unless product.available %}whane-card__soldout{% endunless %}">{{ product.title | escape }}</span>
+          <span class="whane-card__price">
+            {%- if product.available -%}{{ product.price | money }}{%- else -%}Sold out{%- endif -%}
+          </span>
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <p class="whane-meta" style="font-size:13px;">No objects yet.</p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

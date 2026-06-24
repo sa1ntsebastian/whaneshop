@@ -1,0 +1,62 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "WHANE",
+    "theme_version": "1.0.0",
+    "theme_author": "WHANE",
+    "theme_documentation_url": "https://help.shopify.com",
+    "theme_support_url": "https://help.shopify.com"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Two-color system (do not add a third)"
+      },
+      {
+        "type": "color",
+        "id": "color_cobalt",
+        "label": "Cobalt (signature)",
+        "default": "#1B2BC4"
+      },
+      {
+        "type": "color",
+        "id": "color_white",
+        "label": "White (base)",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "header",
+        "content": "Identity"
+      },
+      {
+        "type": "text",
+        "id": "wordmark",
+        "label": "Wordmark",
+        "default": "WHANE.",
+        "info": "Always uppercase, always with the trailing period."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Drop defaults",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Fallbacks used when a product has no drop metafields set. Prefer real metafields (custom.drop_number, custom.drop_closes_at, custom.limited_to)."
+      },
+      {
+        "type": "text",
+        "id": "default_drop_number",
+        "label": "Default drop number",
+        "default": "01"
+      }
+    ]
+  }
+]

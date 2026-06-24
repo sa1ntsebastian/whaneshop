@@ -1,0 +1,72 @@
+{%- comment -%} Product page — sparse, editorial, two-color. {%- endcomment -%}
+{%- liquid
+  assign limited_to = product.metafields.custom.limited_to.value
+  assign closes_at = product.metafields.custom.drop_closes_at.value
+-%}
+
+<article class="whane-product">
+  <div class="whane-product__media {% unless product.featured_image %}whane-placeholder--on-cobalt{% endunless %}">
+    {%- if product.featured_image -%}
+      {{ product.featured_image | image_url: width: 1400 | image_tag: alt: product.title, loading: 'eager', sizes: '50vw', widths: '600,900,1400,1800' }}
+    {%- endif -%}
+  </div>
+
+  <div class="whane-product__info">
+    {%- if product.metafields.custom.drop_number != blank -%}
+      <span class="whane-meta" style="font-size:12px; letter-spacing:3px;">Drop {{ product.metafields.custom.drop_number.value }}</span>
+    {%- endif -%}
+
+    <h1 class="whane-product__title">{{ product.title | escape }}</h1>
+    <div class="whane-product__price whane-meta">{{ product.price | money }}</div>
+
+    {%- if limited_to != blank -%}
+      <div class="whane-meta" style="font-size:12px; margin-top:18px;">Limited to {{ limited_to }}</div>
+    {%- endif -%}
+
+    {%- form 'product', product, class: 'whane-product__form' -%}
+      {%- unless product.has_only_default_variant -%}
+        <div class="whane-product__variants" role="radiogroup" aria-label="{{ product.options_with_values.first.name }}">
+          {%- for variant in product.variants -%}
+            <label class="whane-variant {% if variant == product.selected_or_first_available_variant %}whane-variant--active{% endif %} {% unless variant.available %}whane-card__soldout{% endunless %}">
+              <input type="radio" name="id" value="{{ variant.id }}" class="visually-hidden"
+                {% if variant == product.selected_or_first_available_variant %}checked{% endif %}
+                {% unless variant.available %}disabled{% endunless %}>
+              {{ variant.title | escape }}
+            </label>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      {%- endunless -%}
+
+      {%- if product.available -%}
+        <button type="submit" name="add" class="whane-btn">Reserve</button>
+      {%- else -%}
+        <button type="button" class="whane-btn" aria-disabled="true" disabled>Sold out</button>
+      {%- endif -%}
+    {%- endform -%}
+
+    {%- if product.description != blank -%}
+      <div class="whane-product__desc whane-rte">{{ product.description }}</div>
+    {%- endif -%}
+  </div>
+</article>
+
+<script>
+  // Keep the variant radio buttons visually in sync (flat active state).
+  document.querySelectorAll('.whane-product__variants').forEach(function (group) {
+    group.addEventListener('change', function (e) {
+      group.querySelectorAll('.whane-variant').forEach(function (l) { l.classList.remove('whane-variant--active'); });
+      var label = e.target.closest('.whane-variant');
+      if (label) { label.classList.add('whane-variant--active'); }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

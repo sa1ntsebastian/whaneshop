@@ -1,0 +1,21 @@
+{%- comment -%} Minimal shared footer — two-color, flat, square. {%- endcomment -%}
+<footer class="whane-footer">
+  <span class="whane-meta" style="font-size:11px;">{{ section.settings.left | escape }}</span>
+  <div class="whane-footer__col">
+    {%- for link in section.settings.menu.links -%}
+      <a class="whane-link" href="{{ link.url }}" style="font-size:11px;">{{ link.title | escape }}</a>
+    {%- endfor -%}
+  </div>
+  <span class="whane-meta" style="font-size:11px;">{{ section.settings.right | escape }}</span>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "left", "label": "Left text", "default": "© WHANE" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" },
+    { "type": "text", "id": "right", "label": "Right text", "default": "Berlin" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,167 @@
+{%- comment -%}
+  Direction 02 — "Drop-fokussiert" (Scarcity)
+  The homepage IS the current drop. Scarcity is the message.
+  Drop data comes from product metafields (namespace custom) where present,
+  with section settings as fallbacks so it renders before metafields exist.
+{%- endcomment -%}
+
+{%- liquid
+  assign product = section.settings.product
+
+  assign drop_number = section.settings.drop_number
+  if product.metafields.custom.drop_number != blank
+    assign drop_number = product.metafields.custom.drop_number.value
+  endif
+
+  assign drop_date = section.settings.drop_date
+  if product.metafields.custom.drop_date != blank
+    assign drop_date = product.metafields.custom.drop_date.value
+  endif
+
+  assign closes_at = section.settings.drop_closes_at
+  if product.metafields.custom.drop_closes_at != blank
+    assign closes_at = product.metafields.custom.drop_closes_at.value
+  endif
+
+  assign limited_to = section.settings.limited_to | plus: 0
+  if product.metafields.custom.limited_to != blank
+    assign limited_to = product.metafields.custom.limited_to.value | plus: 0
+  endif
+
+  comment
+    Live availability: prefer summed variant inventory, fall back to a setting.
+  endcomment
+  assign available = section.settings.available | plus: 0
+  assign tracked_total = 0
+  assign has_tracked = false
+  if product != blank
+    for variant in product.variants
+      if variant.inventory_management != blank
+        assign has_tracked = true
+        assign tracked_total = tracked_total | plus: variant.inventory_quantity
+      endif
+    endfor
+    if has_tracked
+      assign available = tracked_total
+    endif
+  endif
+  if available < 0
+    assign available = 0
+  endif
+
+  comment Scarcity bar = how much of the drop is already claimed. endcomment
+  assign sold = limited_to | minus: available
+  assign fill_pct = 0
+  if limited_to > 0
+    assign fill_pct = sold | times: 100 | divided_by: limited_to
+  endif
+  if fill_pct < 0
+    assign fill_pct = 0
+  endif
+  if fill_pct > 100
+    assign fill_pct = 100
+  endif
+
+  assign is_sold_out = false
+  if product != blank and product.available == false
+    assign is_sold_out = true
+  endif
+  if limited_to > 0 and available <= 0
+    assign is_sold_out = true
+  endif
+-%}
+
+<section class="drop-hero">
+  <header class="drop-hero__header">
+    <a href="{{ routes.root_url }}" class="drop-hero__wordmark">{{ settings.wordmark | escape }}</a>
+    <span class="whane-meta" style="font-size:12px;">Drop {{ drop_number }}{% if drop_date != blank %} · {{ drop_date }}{% endif %}</span>
+  </header>
+
+  <div class="drop-hero__body">
+    <div class="drop-hero__media {% unless product.featured_image %}whane-placeholder--on-cobalt{% endunless %}">
+      {%- if product.featured_image -%}
+        {{ product.featured_image | image_url: width: 1400 | image_tag: alt: product.title, loading: 'eager', sizes: '56vw', widths: '600,900,1400,1800' }}
+      {%- endif -%}
+      <span class="drop-hero__media-caption">{{ section.settings.media_caption | escape }}</span>
+    </div>
+
+    <div class="drop-hero__info">
+      <span class="drop-hero__eyebrow whane-meta">{{ section.settings.eyebrow | escape }}</span>
+
+      <h1 class="drop-hero__title">Drop<br>{{ drop_number }}</h1>
+
+      <span class="drop-hero__spec whane-meta">
+        {%- if product != blank -%}
+          {{ product.title }} — {{ product.price | money }}
+        {%- else -%}
+          {{ section.settings.spec | escape }}
+        {%- endif -%}
+      </span>
+
+      {%- if limited_to > 0 -%}
+        <div class="drop-hero__avail">
+          <div class="drop-hero__avail-row whane-meta">
+            <span>{{ available }} / {{ limited_to }} available</span>
+            <span>Limited to {{ limited_to }}</span>
+          </div>
+          <div class="drop-hero__bar" role="progressbar" aria-valuenow="{{ fill_pct }}" aria-valuemin="0" aria-valuemax="100" aria-label="Drop claimed">
+            <div class="drop-hero__bar-fill" style="width: {{ fill_pct }}%;"></div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if closes_at != blank or section.settings.show_countdown -%}
+        <div class="drop-hero__countdown">
+          <span class="drop-hero__eyebrow whane-meta">{{ section.settings.countdown_label | escape }}</span>
+          <div class="drop-hero__timer js-drop-countdown"
+               data-closes-at="{{ closes_at }}"
+               data-closed-label="{{ section.settings.closed_label | escape }}">00:00:00</div>
+        </div>
+      {%- endif -%}
+
+      {%- if product != blank and is_sold_out == false -%}
+        {%- form 'product', product, class: 'drop-hero__cta' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" name="add" class="whane-btn">{{ section.settings.cta_label | escape }}</button>
+        {%- endform -%}
+      {%- else -%}
+        <button type="button" class="whane-btn drop-hero__cta" aria-disabled="true" disabled>
+          {{ section.settings.sold_out_cta | escape }}
+        </button>
+      {%- endif -%}
+
+      {%- if section.settings.previous_drop != blank -%}
+        <span class="drop-hero__soldout whane-meta">{{ section.settings.previous_drop | escape }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Drop hero",
+  "tag": "section",
+  "class": "section-drop-hero",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Drop product" },
+    { "type": "header", "content": "Drop meta (fallbacks — prefer product metafields)" },
+    { "type": "text", "id": "drop_number", "label": "Drop number", "default": "01" },
+    { "type": "text", "id": "drop_date", "label": "Drop date label", "default": "24.06.26" },
+    { "type": "text", "id": "drop_closes_at", "label": "Drop closes at (ISO datetime)", "info": "e.g. 2026-06-26T18:00:00. Prefer metafield custom.drop_closes_at." },
+    { "type": "checkbox", "id": "show_countdown", "label": "Show countdown", "default": true },
+    { "type": "header", "content": "Scarcity" },
+    { "type": "text", "id": "limited_to", "label": "Limited to", "default": "100" },
+    { "type": "text", "id": "available", "label": "Available (fallback)", "default": "37", "info": "Overridden by live inventory when tracked." },
+    { "type": "header", "content": "Copy" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The current drop" },
+    { "type": "text", "id": "spec", "label": "Spec line (fallback)", "default": "Field Jacket / Cobalt — €280" },
+    { "type": "text", "id": "media_caption", "label": "Media caption", "default": "Product shot · Field jacket — front" },
+    { "type": "text", "id": "countdown_label", "label": "Countdown label", "default": "Drop closes in" },
+    { "type": "text", "id": "closed_label", "label": "Closed label", "default": "Drop closed" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Reserve" },
+    { "type": "text", "id": "sold_out_cta", "label": "Sold-out CTA label", "default": "Sold out" },
+    { "type": "text", "id": "previous_drop", "label": "Previous drop note", "default": "Drop 00 · Field Cap — Sold out" }
+  ],
+  "presets": [{ "name": "Drop hero" }]
+}
+{% endschema %}

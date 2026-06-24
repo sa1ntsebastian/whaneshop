@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "wordmark_hero": {
+      "type": "wordmark-hero",
+      "settings": {
+        "est_label": "Est. MMXXVI",
+        "link_1_label": "Shop",
+        "link_2_label": "Info",
+        "show_placeholder": true,
+        "caption": "Object 01 · Limited to 50",
+        "footer_left": "© WHANE",
+        "footer_right": "Berlin"
+      }
+    }
+  },
+  "order": ["wordmark_hero"]
+}

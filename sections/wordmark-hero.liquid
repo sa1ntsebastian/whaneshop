@@ -1,0 +1,77 @@
+{%- comment -%}
+  Direction 01 — "Maximal reduziert" (Gallery)
+  Brand-first landing: giant wordmark on white, a single product, minimal nav.
+{%- endcomment -%}
+
+{%- liquid
+  assign product = section.settings.featured_product
+  assign limited_to = section.settings.limited_to
+  if product != blank and product.metafields.custom.limited_to != blank
+    assign limited_to = product.metafields.custom.limited_to.value
+  endif
+-%}
+
+<section class="wordmark-hero">
+  <header class="wordmark-hero__header">
+    <span class="whane-meta" style="font-size:12px;">{{ section.settings.est_label | escape }}</span>
+    <nav class="wordmark-hero__nav">
+      <a class="whane-link" href="{{ section.settings.link_1_url }}" style="font-size:12px;">{{ section.settings.link_1_label | escape }}</a>
+      <a class="whane-link" href="{{ section.settings.link_2_url }}" style="font-size:12px;">{{ section.settings.link_2_label | escape }}</a>
+    </nav>
+  </header>
+
+  <div class="wordmark-hero__main">
+    <h1 class="wordmark-hero__wordmark">{{ section.settings.wordmark | default: settings.wordmark | escape }}</h1>
+
+    {%- if product != blank or section.settings.show_placeholder -%}
+      <a class="wordmark-hero__product" href="{{ product.url | default: section.settings.product_link }}">
+        <span class="wordmark-hero__shot {% unless product.featured_image %}whane-placeholder--on-white{% endunless %}">
+          {%- if product.featured_image -%}
+            {{ product.featured_image | image_url: width: 400 | image_tag: alt: product.title, loading: 'eager', widths: '196,392' }}
+          {%- else -%}
+            <span class="whane-meta" style="font-size:10px; letter-spacing:1px; text-align:center; line-height:1.6;">product<br>shot</span>
+          {%- endif -%}
+        </span>
+        <span class="wordmark-hero__caption whane-meta">
+          {%- if product != blank -%}
+            {{ product.title }}{% if limited_to != blank %} · Limited to {{ limited_to }}{% endif %}
+          {%- else -%}
+            {{ section.settings.caption | escape }}
+          {%- endif -%}
+        </span>
+      </a>
+    {%- endif -%}
+  </div>
+
+  <footer class="wordmark-hero__footer">
+    <span class="whane-meta" style="font-size:11px;">{{ section.settings.footer_left | escape }}</span>
+    <span class="whane-meta" style="font-size:11px;">{{ section.settings.footer_right | escape }}</span>
+  </footer>
+</section>
+
+{% schema %}
+{
+  "name": "Wordmark hero",
+  "tag": "section",
+  "class": "section-wordmark-hero",
+  "settings": [
+    { "type": "text", "id": "wordmark", "label": "Wordmark", "info": "Defaults to the theme wordmark setting." },
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "est_label", "label": "Top-left label", "default": "Est. MMXXVI" },
+    { "type": "text", "id": "link_1_label", "label": "Link 1 label", "default": "Shop" },
+    { "type": "url", "id": "link_1_url", "label": "Link 1 URL" },
+    { "type": "text", "id": "link_2_label", "label": "Link 2 label", "default": "Info" },
+    { "type": "url", "id": "link_2_url", "label": "Link 2 URL" },
+    { "type": "header", "content": "Single product" },
+    { "type": "product", "id": "featured_product", "label": "Featured product" },
+    { "type": "checkbox", "id": "show_placeholder", "label": "Show placeholder when no product", "default": true },
+    { "type": "text", "id": "caption", "label": "Placeholder caption", "default": "Object 01 · Limited to 50" },
+    { "type": "text", "id": "limited_to", "label": "Fallback \"limited to\" count", "info": "Used if the product has no custom.limited_to metafield." },
+    { "type": "url", "id": "product_link", "label": "Placeholder product link" },
+    { "type": "header", "content": "Footer" },
+    { "type": "text", "id": "footer_left", "label": "Footer left", "default": "© WHANE" },
+    { "type": "text", "id": "footer_right", "label": "Footer right", "default": "Berlin" }
+  ],
+  "presets": [{ "name": "Wordmark hero" }]
+}
+{% endschema %}

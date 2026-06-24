@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "header": { "type": "whane-header" },
+    "main": { "type": "main-page" },
+    "footer": { "type": "minimal-footer" }
+  },
+  "order": ["header", "main", "footer"]
+}
