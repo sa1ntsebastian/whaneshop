@@ -35,11 +35,18 @@ from the right-hand "Theme template" dropdown:
 > `info`. If the **Lookbook** page shows Info (or vice-versa), the wrong **Theme
 > template** is selected on that page — re-pick it from the dropdown.
 
-Then:
-- **Theme settings → Navigation:** the three links default to `/pages/shop`,
-  `/pages/lookbook`, `/pages/info` — leave them if you used the handles above.
+Then **set the menu links by picking the page (not by typing a URL):**
+- **Theme settings → Navigation** → for each of the three URL fields, click it
+  and choose the page from the dropdown (**Pages → Shop / Lookbook / Info**).
+  The picker always inserts the correct address, even if a page handle differs —
+  this is the #1 cause of "Lookbook shows Info" / "Shop 404": a link pointing at
+  the wrong page.
 - **Shop section:** in the theme editor, pick the **Drop collection** whose
   products fill the carousel.
+
+> Re-upload / sync the latest theme first. The Shop template was renamed from
+> `drops` to **`shop`** — if a page still shows the "drops" template, you're on
+> an older copy; re-pick **shop** after updating.
 
 ### Local preview (no Shopify needed)
 Open `preview/index.html` in a browser — all four pages at 1440px desktop width

@@ -56,14 +56,14 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "The menu band (shown on every page except the homepage) and the homepage nav use these three links. Point them at the Shop, Lookbook and Info pages once created (e.g. /pages/shop, /pages/lookbook, /pages/info)."
+        "content": "The menu band (every page except the homepage) and the homepage nav use these three links. For each URL field, click it and SELECT the page from the dropdown (Pages → Shop / Lookbook / Info). Do not type the URL by hand — the picker always uses the correct address even if the page handle differs."
       },
       { "type": "text", "id": "nav_shop_label", "label": "Link 1 label", "default": "Shop" },
-      { "type": "url", "id": "nav_shop_link", "label": "Link 1 URL" },
+      { "type": "url", "id": "nav_shop_link", "label": "Link 1 URL — select the Shop page" },
       { "type": "text", "id": "nav_lookbook_label", "label": "Link 2 label", "default": "Lookbook" },
-      { "type": "url", "id": "nav_lookbook_link", "label": "Link 2 URL" },
+      { "type": "url", "id": "nav_lookbook_link", "label": "Link 2 URL — select the Lookbook page" },
       { "type": "text", "id": "nav_info_label", "label": "Link 3 label", "default": "Info" },
-      { "type": "url", "id": "nav_info_link", "label": "Link 3 URL" }
+      { "type": "url", "id": "nav_info_link", "label": "Link 3 URL — select the Info page" }
     ]
   }
 ]
