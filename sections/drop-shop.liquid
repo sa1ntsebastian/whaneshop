@@ -133,7 +133,11 @@
                   <div class="shop__bar-fill" style="width: {{ fill_pct }}%;"></div>
                 </div>
               </div>
-              <button type="button" class="whane-btn shop__cta" aria-disabled="true">{{ section.settings.cta_label | escape }}</button>
+              {%- if avail > 0 -%}
+                <button type="button" class="whane-btn shop__cta">{{ section.settings.cta_label | escape }}</button>
+              {%- else -%}
+                <button type="button" class="whane-btn shop__cta" aria-disabled="true">{{ section.settings.sold_out_label | escape }}</button>
+              {%- endif -%}
             </div>
           </article>
         {%- endfor -%}
@@ -171,7 +175,7 @@
     { "type": "checkbox", "id": "show_placeholders", "label": "Show demo products when no collection / empty", "default": true, "info": "Lets you test the carousel before connecting a collection. Turn off for production." },
     { "type": "text", "id": "ph_titles", "label": "Demo titles (comma-separated)", "default": "Field Jacket,Field Cap,Mono Tee" },
     { "type": "text", "id": "ph_prices", "label": "Demo prices (comma-separated)", "default": "€280,€90,€60" },
-    { "type": "text", "id": "ph_available", "label": "Demo available (comma-separated)", "default": "37,8,120" },
+    { "type": "text", "id": "ph_available", "label": "Demo available (comma-separated)", "default": "37,0,120" },
     { "type": "text", "id": "ph_limited", "label": "Demo limited-to (comma-separated)", "default": "100,50,200" }
   ],
   "presets": [{ "name": "Shop / Drops" }]
