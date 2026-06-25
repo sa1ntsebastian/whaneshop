@@ -221,7 +221,7 @@ button { font-family: inherit; cursor: pointer; }
   font-family: var(--font-display);
   font-size: 96px;
   line-height: 0.86;
-  letter-spacing: -2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--cobalt);
   margin: 14px 0 0;
@@ -286,7 +286,7 @@ button { font-family: inherit; cursor: pointer; }
   font-family: var(--font-display);
   font-size: 64px;
   line-height: 0.9;
-  letter-spacing: -1px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--white);
   margin: 0;
@@ -322,7 +322,7 @@ button { font-family: inherit; cursor: pointer; }
 .whane-product__media { border-right: 1px solid var(--cobalt); min-height: 70vh; position: relative; overflow: hidden; }
 .whane-product__media img { width: 100%; height: 100%; object-fit: cover; }
 .whane-product__info { padding: 64px; display: flex; flex-direction: column; justify-content: center; }
-.whane-product__title { font-family: var(--font-display); font-size: 72px; line-height: 0.86; letter-spacing: -2px; text-transform: uppercase; margin: 0; }
+.whane-product__title { font-family: var(--font-display); font-size: 72px; line-height: 0.86; letter-spacing: 1px; text-transform: uppercase; margin: 0; }
 .whane-product__price { font-size: 14px; letter-spacing: 1px; margin-top: 24px; }
 .whane-product__desc { font-family: var(--font-mono); font-size: 13px; line-height: 1.7; letter-spacing: 0.5px; margin-top: 28px; }
 .whane-product__form { margin-top: 36px; }
@@ -341,7 +341,7 @@ button { font-family: inherit; cursor: pointer; }
 
 .whane-collection { padding: 56px var(--pad-x) 96px; }
 .whane-collection__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 48px; }
-.whane-collection__title { font-family: var(--font-display); font-size: 96px; line-height: 0.86; letter-spacing: -2px; text-transform: uppercase; margin: 0; }
+.whane-collection__title { font-family: var(--font-display); font-size: 96px; line-height: 0.86; letter-spacing: 1px; text-transform: uppercase; margin: 0; }
 .whane-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--cobalt); border: 1px solid var(--cobalt); }
 .whane-card { background: var(--white); padding: 28px; display: flex; flex-direction: column; }
 .whane-card__media { aspect-ratio: 3 / 4; overflow: hidden; margin-bottom: 18px; position: relative; }
@@ -351,11 +351,11 @@ button { font-family: inherit; cursor: pointer; }
 .whane-card__soldout { text-decoration: line-through; }
 
 .whane-cart { padding: 56px var(--pad-x) 96px; }
-.whane-cart__title { font-family: var(--font-display); font-size: 96px; line-height: 0.86; letter-spacing: -2px; text-transform: uppercase; margin: 0 0 40px; }
+.whane-cart__title { font-family: var(--font-display); font-size: 96px; line-height: 0.86; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 40px; }
 .whane-cart__row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--cobalt); align-items: center; font-family: var(--font-mono); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
 .whane-cart__foot { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--cobalt); padding-top: 32px; margin-top: 8px; }
 .whane-rte { font-family: var(--font-mono); font-size: 13px; line-height: 1.8; letter-spacing: 0.3px; max-width: 60ch; }
-.whane-rte h1, .whane-rte h2, .whane-rte h3 { font-family: var(--font-display); text-transform: uppercase; letter-spacing: -1px; }
+.whane-rte h1, .whane-rte h2, .whane-rte h3 { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.5px; }
 
 /* ==========================================================================
    Outline button (homepage "Enter Shop")
@@ -434,7 +434,7 @@ button { font-family: inherit; cursor: pointer; }
 .shop__media-caption { position: absolute; left: 40px; bottom: 40px; color: var(--white); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
 .shop__info { width: 44%; padding: 56px 64px; display: flex; flex-direction: column; justify-content: center; }
 .shop__eyebrow { font-size: 12px; letter-spacing: 3px; }
-.shop__title { font-family: var(--font-display); font-size: 88px; line-height: 0.86; letter-spacing: -2px; text-transform: uppercase; color: var(--cobalt); margin: 14px 0 0; }
+.shop__title { font-family: var(--font-display); font-size: 88px; line-height: 0.86; letter-spacing: 1px; text-transform: uppercase; color: var(--cobalt); margin: 14px 0 0; }
 .shop__spec { font-size: 13px; letter-spacing: 1px; margin-top: 24px; }
 .shop__avail { margin-top: 36px; }
 .shop__count { font-family: var(--font-display); font-size: 52px; line-height: 1; color: var(--cobalt); margin-top: 4px; font-variant-numeric: tabular-nums; }
@@ -470,7 +470,7 @@ button { font-family: inherit; cursor: pointer; }
 .info__inner { flex: 1; padding: 56px 0 72px; width: 100%; }
 .info__title {
   font-family: var(--font-display);
-  font-size: 140px; line-height: 0.82; letter-spacing: -3px;
+  font-size: 140px; line-height: 0.82; letter-spacing: 2px;
   text-transform: uppercase; color: var(--cobalt); margin: 0;
 }
 /* Two-column editorial split below the headline */
@@ -486,7 +486,7 @@ button { font-family: inherit; cursor: pointer; }
 .info__hl { background: var(--cobalt); color: var(--white); padding: 2px 8px; } /* highlighted last line */
 .info__block + .info__block { margin-top: 48px; }
 .info__label {
-  font-family: var(--font-display); font-size: 56px; line-height: 0.9; letter-spacing: -1px;
+  font-family: var(--font-display); font-size: 56px; line-height: 0.9; letter-spacing: 1px;
   text-transform: uppercase; color: var(--cobalt); margin: 0 0 14px;
 }
 .info__lines { font-family: var(--font-mono); font-size: 13px; line-height: 1.9; letter-spacing: 0.5px; color: var(--cobalt); margin: 0; }
@@ -531,7 +531,7 @@ button { font-family: inherit; cursor: pointer; }
   .shop__arrow--next { left: calc(50% + 8px); right: auto; }
   .shop__counter { bottom: 32px; left: 28px; }
 
-  .info__title { font-size: 64px; letter-spacing: -1px; }
+  .info__title { font-size: 64px; letter-spacing: 1px; }
   .info__label { font-size: 40px; }
   .info__grid { grid-template-columns: 1fr; gap: 40px; margin-top: 40px; }
   .menu-band { padding: 24px 28px; }
