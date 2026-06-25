@@ -29,12 +29,25 @@
   </div>
 
   <div class="whane-product__info">
-    {%- comment -%} Split a title like "WHANE. Tee — W.1.1": code shows small ABOVE the name. {%- endcomment -%}
+    {%- comment -%}
+      Split a title like "WHANE. Tee — W.1.1": the code (after the dash) shows
+      small ABOVE the name. Handles em dash, en dash and a normal hyphen
+      (with surrounding spaces, so codes like "W.1.1" aren't broken up).
+    {%- endcomment -%}
     {%- liquid
-      assign title_parts = product.title | split: '—'
-      assign main_title = title_parts[0] | strip
+      assign sep = ''
+      if product.title contains '—'
+        assign sep = '—'
+      elsif product.title contains '–'
+        assign sep = '–'
+      elsif product.title contains ' - '
+        assign sep = ' - '
+      endif
+      assign main_title = product.title
       assign code = ''
-      if title_parts.size > 1
+      if sep != blank
+        assign title_parts = product.title | split: sep
+        assign main_title = title_parts[0] | strip
         assign code = title_parts | last | strip
       endif
     -%}

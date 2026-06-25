@@ -545,17 +545,18 @@ button { font-family: inherit; cursor: pointer; }
   .shop__media { width: 100%; height: 45%; border-right: 0; border-bottom: 1px solid var(--cobalt); }
   /* Extra bottom padding reserves space for the bottom arrow pair so nothing
      (product name, price, reserve button) is ever covered. */
-  .shop__info { width: 100%; height: 55%; padding: 28px 28px 88px; justify-content: flex-start; overflow: hidden; }
+  .shop__info { width: 100%; height: 55%; padding: 28px 28px 32px; justify-content: flex-start; overflow: hidden; }
   .shop__title { font-size: 56px; }
   .shop__count { font-size: 40px; }
 
-  /* FIX: on mobile/tablet the side-centered arrows overlapped the product
-     name. Move them to a centered pair at the bottom edge instead. Swipe
-     still works (CSS scroll-snap on .shop__track). */
-  .shop__arrow { top: auto; bottom: 18px; transform: none; }
-  .shop__arrow--prev { left: calc(50% - 62px); right: auto; }
-  .shop__arrow--next { left: calc(50% + 8px); right: auto; }
-  .shop__counter { bottom: 32px; left: 28px; }
+  /* FIX (mobile): arrows sit centered ON THE IMAGE (top media area), so they
+     never cover the product info. Image caption + counter hidden so there's
+     no text over the photo. Swipe still works (scroll-snap). */
+  .shop__media-caption { display: none; }
+  .shop__counter { display: none; }
+  .shop__arrow { top: 22%; bottom: auto; transform: translateY(-50%); }
+  .shop__arrow--prev { left: 12px; right: auto; }
+  .shop__arrow--next { right: 12px; left: auto; }
 
   .info__title { font-size: 64px; letter-spacing: 1px; }
   .info__label { font-size: 40px; }
