@@ -42,7 +42,9 @@ Then **set the menu links by picking the page (not by typing a URL):**
   this is the #1 cause of "Lookbook shows Info" / "Shop 404": a link pointing at
   the wrong page.
 - **Shop section:** in the theme editor, pick the **Drop collection** whose
-  products fill the carousel.
+  products fill the carousel. Until one is connected (or if it's empty) the
+  carousel shows **demo placeholder products** so you can test arrows/swipe;
+  turn off *Placeholder demo → Show demo products* for production.
 
 > Re-upload / sync the latest theme first. The Shop template was renamed from
 > `drops` to **`shop`** — if a page still shows the "drops" template, you're on

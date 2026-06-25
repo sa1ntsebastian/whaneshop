@@ -93,6 +93,51 @@
           </article>
         {%- endfor -%}
       </div>
+    {%- elsif section.settings.show_placeholders -%}
+      {%- comment -%} Demo carousel so the layout is testable before a collection is connected. {%- endcomment -%}
+      {%- liquid
+        assign ph_titles = section.settings.ph_titles | split: ','
+        assign ph_prices = section.settings.ph_prices | split: ','
+        assign ph_avail  = section.settings.ph_available | split: ','
+        assign ph_limit  = section.settings.ph_limited | split: ','
+        assign ph_count = ph_titles.size
+      -%}
+      <button type="button" class="shop__arrow shop__arrow--prev" data-carousel-prev aria-label="Previous product">&larr;</button>
+      <button type="button" class="shop__arrow shop__arrow--next" data-carousel-next aria-label="Next product">&rarr;</button>
+      <span class="shop__counter" data-carousel-counter aria-hidden="true">01 / {{ ph_count }}</span>
+
+      <div class="shop__track" data-carousel-track tabindex="0" aria-label="Products (demo)">
+        {%- for title in ph_titles -%}
+          {%- liquid
+            assign i = forloop.index0
+            assign avail = ph_avail[i] | plus: 0
+            assign limit = ph_limit[i] | plus: 0
+            assign fill_pct = 0
+            if limit > 0
+              assign sold = limit | minus: avail
+              assign fill_pct = sold | times: 100 | divided_by: limit
+            endif
+          -%}
+          <article class="shop__slide" data-carousel-slide>
+            <div class="shop__media whane-placeholder--on-cobalt">
+              <span class="shop__media-caption">{{ title | strip }} · demo</span>
+            </div>
+            <div class="shop__info">
+              <span class="shop__eyebrow whane-meta">Drop 01 · demo</span>
+              <h2 class="shop__title">{{ title | strip }}</h2>
+              <span class="shop__spec whane-meta">{{ ph_prices[i] | strip }}</span>
+              <div class="shop__avail">
+                <span class="whane-meta" style="font-size:12px; letter-spacing:2px;">Available</span>
+                <div class="shop__count">{{ avail }}<small> / {{ limit }} · Limited to {{ limit }}</small></div>
+                <div class="shop__bar" role="progressbar" aria-valuenow="{{ fill_pct }}" aria-valuemin="0" aria-valuemax="100" aria-label="Claimed">
+                  <div class="shop__bar-fill" style="width: {{ fill_pct }}%;"></div>
+                </div>
+              </div>
+              <button type="button" class="whane-btn shop__cta" aria-disabled="true">{{ section.settings.cta_label | escape }}</button>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
     {%- else -%}
       <div class="shop__empty">
         <p class="whane-meta" style="font-size:13px;">
@@ -121,7 +166,13 @@
     { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Reserve" },
     { "type": "text", "id": "sold_out_label", "label": "Sold-out label", "default": "Sold out" },
     { "type": "header", "content": "Scarcity" },
-    { "type": "text", "id": "fallback_available", "label": "Available (fallback)", "default": "37", "info": "Used only when a product has no tracked inventory." }
+    { "type": "text", "id": "fallback_available", "label": "Available (fallback)", "default": "37", "info": "Used only when a product has no tracked inventory." },
+    { "type": "header", "content": "Placeholder demo" },
+    { "type": "checkbox", "id": "show_placeholders", "label": "Show demo products when no collection / empty", "default": true, "info": "Lets you test the carousel before connecting a collection. Turn off for production." },
+    { "type": "text", "id": "ph_titles", "label": "Demo titles (comma-separated)", "default": "Field Jacket,Field Cap,Mono Tee" },
+    { "type": "text", "id": "ph_prices", "label": "Demo prices (comma-separated)", "default": "€280,€90,€60" },
+    { "type": "text", "id": "ph_available", "label": "Demo available (comma-separated)", "default": "37,8,120" },
+    { "type": "text", "id": "ph_limited", "label": "Demo limited-to (comma-separated)", "default": "100,50,200" }
   ],
   "presets": [{ "name": "Shop / Drops" }]
 }
