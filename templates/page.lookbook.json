@@ -2,11 +2,22 @@
   "sections": {
     "lookbook": {
       "type": "editorial-lookbook",
-      "settings": {
-        "heading": "Autumn\nField",
-        "look_number": "Look 01 / 06",
-        "cta_label": "Enter shop"
-      }
+      "blocks": {
+        "look-1": {
+          "type": "look",
+          "settings": { "heading": "Autumn\nField", "look_number": "Look 01 / 06", "cta_label": "Enter shop" }
+        },
+        "look-2": {
+          "type": "look",
+          "settings": { "heading": "Cobalt\nHour", "look_number": "Look 02 / 06", "cta_label": "Enter shop" }
+        },
+        "look-3": {
+          "type": "look",
+          "settings": { "heading": "Field\nNotes", "look_number": "Look 03 / 06", "cta_label": "Enter shop" }
+        }
+      },
+      "block_order": ["look-1", "look-2", "look-3"],
+      "settings": {}
     }
   },
   "order": ["lookbook"]

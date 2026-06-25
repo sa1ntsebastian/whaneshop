@@ -11,22 +11,35 @@ meta type, flat/square/no-shadow surfaces, generous intentional whitespace.
 | Page | Template | Notes |
 |---|---|---|
 | **Home** | `templates/index.json` (section `wordmark-hero`) | Giant `WHANE.` on white, minimal nav (Shop · Lookbook · Info), a single **„Zum Shop"** button. No menu band. |
-| **Shop / Drops** | `templates/page.drops.json` (section `drop-shop`) | Full-screen **product carousel** — click ← → or **swipe** between products. Each product **image links to its product page**. **No countdown**; scarcity shown as a live **stock counter** (`available / limited`) + bar. |
+| **Shop / Drops** | `templates/page.shop.json` (section `drop-shop`) | Full-screen **product carousel** — click ← → or **swipe** between products. Each product **image links to its product page**. **No countdown**; scarcity shown as a live **stock counter** (`available / limited`) + bar. |
 | **Lookbook** | `templates/page.lookbook.json` (section `editorial-lookbook`) | Full-screen **carousel of looks** (← → / swipe), sparse white overlay, white menu band. Each look is a block (image + heading + look number). |
 | **Info** | `templates/page.info.json` (section `info`) | Sparse page content, menu band. |
 
 The **menu band** (wordmark + Shop · Lookbook · Info) appears on **every page
 except the homepage** — including product / collection / cart / 404.
 
-### Set it up in Shopify
-1. Create three **Pages** in admin and assign their templates:
-   - Page "Shop" → template **`page.drops`**
-   - Page "Lookbook" → template **`page.lookbook`**
-   - Page "Info" → template **`page.info`**
-2. **Theme settings → Navigation:** point the three links at those pages
-   (defaults: `/pages/shop`, `/pages/lookbook`, `/pages/info`).
-3. **Shop section:** in the theme editor, pick the **Drop collection** whose
-   products fill the carousel.
+### Set it up in Shopify — page name = handle = template (all identical)
+Create three **Pages** (Admin → Online Store → Pages → *Add page*). For each,
+type the **Title** exactly as below and pick the matching **Theme template**
+from the right-hand "Theme template" dropdown:
+
+| Page title | Handle (auto) | Theme template to choose |
+|---|---|---|
+| `Shop` | `shop` | **shop** |
+| `Lookbook` | `lookbook` | **lookbook** |
+| `Info` | `info` | **info** |
+
+> The handle must match the nav link. If `/pages/shop` 404s, the page handle
+> isn't `shop` (e.g. a page titled "Drops" gets handle `drops`). Open the page,
+> click *Edit website SEO*, and set the URL handle to `shop` / `lookbook` /
+> `info`. If the **Lookbook** page shows Info (or vice-versa), the wrong **Theme
+> template** is selected on that page — re-pick it from the dropdown.
+
+Then:
+- **Theme settings → Navigation:** the three links default to `/pages/shop`,
+  `/pages/lookbook`, `/pages/info` — leave them if you used the handles above.
+- **Shop section:** in the theme editor, pick the **Drop collection** whose
+  products fill the carousel.
 
 ### Local preview (no Shopify needed)
 Open `preview/index.html` in a browser — all four pages at 1440px desktop width
@@ -40,7 +53,7 @@ snippets/  menu-band.liquid            (shared header, default + white overlay)
 sections/  wordmark-hero · drop-shop · editorial-lookbook · info
            whane-header · minimal-footer
            main-product · main-collection · main-cart · main-page · main-404
-templates/ index · page.drops · page.lookbook · page.info
+templates/ index · page.shop · page.lookbook · page.info
            product · collection · cart · page · 404
 config/    settings_schema.json · settings_data.json
 locales/   en.default.json
