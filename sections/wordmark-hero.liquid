@@ -5,8 +5,7 @@
 {%- endcomment -%}
 
 <section class="wordmark-hero">
-  <header class="wordmark-hero__header">
-    <span class="whane-meta" style="font-size:12px;">{{ section.settings.est_label | escape }}</span>
+  <header class="wordmark-hero__header" style="justify-content:flex-end;">
     <nav class="wordmark-hero__nav" aria-label="Primary">
       {%- if settings.nav_shop_label != blank -%}
         <a class="whane-link" href="{{ settings.nav_shop_link | default: '#' }}" style="font-size:12px;">{{ settings.nav_shop_label | escape }}</a>
@@ -21,7 +20,7 @@
   </header>
 
   <div class="wordmark-hero__main">
-    <h1 class="wordmark-hero__wordmark">{{ section.settings.wordmark | default: settings.wordmark | escape }}</h1>
+    <h1 class="wordmark-hero__wordmark">{% render 'wordmark' %}</h1>
 
     {%- if section.settings.cta_label != blank -%}
       <a class="whane-btn--outline wordmark-hero__cta"
@@ -43,16 +42,13 @@
   "tag": "section",
   "class": "section-wordmark-hero",
   "settings": [
-    { "type": "text", "id": "wordmark", "label": "Wordmark", "info": "Defaults to the theme wordmark setting." },
-    { "type": "header", "content": "Header" },
-    { "type": "text", "id": "est_label", "label": "Top-left label", "default": "Est. MMXXVI" },
-    { "type": "paragraph", "content": "Nav links (Shop · Lookbook · Info) are set in Theme settings → Navigation." },
+    { "type": "paragraph", "content": "Wordmark (text or SVG) and nav links (Shop · Lookbook · Info) are set in Theme settings → Brand / Navigation." },
     { "type": "header", "content": "Call to action" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "Zum Shop" },
     { "type": "url", "id": "cta_link", "label": "Button link", "info": "Defaults to the Shop nav link." },
     { "type": "header", "content": "Footer" },
     { "type": "text", "id": "footer_left", "label": "Footer left", "default": "© WHANE" },
-    { "type": "text", "id": "footer_right", "label": "Footer right", "default": "Berlin" }
+    { "type": "text", "id": "footer_right", "label": "Footer right", "default": "VIE" }
   ],
   "presets": [{ "name": "Wordmark hero" }]
 }

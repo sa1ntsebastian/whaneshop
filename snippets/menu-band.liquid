@@ -12,7 +12,7 @@
   endif
 -%}
 <header class="{{ classes }}">
-  <a href="{{ routes.root_url }}" class="menu-band__wordmark">{{ settings.wordmark | escape }}</a>
+  <a href="{{ routes.root_url }}" class="menu-band__wordmark">{% render 'wordmark' %}</a>
   <nav class="menu-band__nav" aria-label="Primary">
     {%- if settings.nav_shop_label != blank -%}
       <a class="whane-link" href="{{ settings.nav_shop_link | default: '#' }}" style="font-size:12px;">{{ settings.nav_shop_label | escape }}</a>

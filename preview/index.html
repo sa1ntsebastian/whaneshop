@@ -58,11 +58,20 @@
   .shop__arrow--prev{left:24px;}.shop__arrow--next{right:24px;}
   .shop__counter{position:absolute;left:var(--pad-x);bottom:28px;z-index:3;font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--cobalt);text-transform:uppercase;}
 
-  /* LOOKBOOK */
-  .lb{height:100%;position:relative;background:repeating-linear-gradient(135deg,var(--cobalt) 0 19px,rgba(255,255,255,.09) 19px 21px);}
-  .lb__bot{position:absolute;bottom:48px;left:var(--pad-x);right:var(--pad-x);display:flex;justify-content:space-between;align-items:flex-end;}
+  /* LOOKBOOK carousel */
+  .lb{height:100%;position:relative;overflow:hidden;background:var(--cobalt);}
+  .lb__vp{position:absolute;inset:0;z-index:1;}
+  .lb__track{display:flex;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;}
+  .lb__track::-webkit-scrollbar{display:none;}
+  .lb__slide{flex:0 0 100%;width:100%;height:100%;scroll-snap-align:start;position:relative;background:repeating-linear-gradient(135deg,var(--cobalt) 0 19px,rgba(255,255,255,.09) 19px 21px);}
+  .lb__bot{position:absolute;bottom:48px;left:var(--pad-x);right:var(--pad-x);z-index:2;display:flex;justify-content:space-between;align-items:flex-end;}
   .lb__head{font-family:var(--display);font-size:64px;line-height:.9;letter-spacing:-1px;color:#fff;text-transform:uppercase;margin:0;}
   .lb__enter{font-family:var(--mono);font-size:12px;letter-spacing:3px;color:#fff;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:4px;text-decoration:none;}
+  .lb__arrow{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;z-index:3;border:1px solid #fff;background:transparent;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:20px;cursor:pointer;}
+  .lb__arrow:hover{background:#fff;color:var(--cobalt);}
+  .lb__arrow[disabled]{opacity:.3;cursor:not-allowed;}
+  .lb__arrow--prev{left:24px;}.lb__arrow--next{right:24px;}
+  .lb__counter{position:absolute;left:0;right:0;bottom:52px;z-index:3;text-align:center;color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;}
 
   /* INFO */
   .info{height:100%;display:flex;flex-direction:column;background:#fff;}
@@ -75,12 +84,12 @@
 <body>
 <div class="wrap">
 
-  <div class="lab">Home — Galerie (kein Menüband, Button „Zum Shop")</div>
+  <div class="lab">Home — Galerie (kein Menüband, kein EST, Button „Zum Shop")</div>
   <div class="frame"><div class="home">
-    <div class="home__hd"><span class="meta" style="font-size:12px">Est. MMXXVI</span>
+    <div class="home__hd" style="justify-content:flex-end">
       <div class="home__nav"><a class="link" href="#">Shop</a><a class="link" href="#">Lookbook</a><a class="link" href="#">Info</a></div></div>
     <div class="home__main"><div class="home__word">WHANE.</div><a class="btn-outline" href="#">Zum Shop</a></div>
-    <div class="home__ft"><span class="meta" style="font-size:11px">© WHANE</span><span class="meta" style="font-size:11px">Berlin</span></div>
+    <div class="home__ft"><span class="meta" style="font-size:11px">© WHANE</span><span class="meta" style="font-size:11px">VIE</span></div>
   </div></div>
 
   <div class="lab">Shop / Drops — Karussell (← → / wischen, kein Countdown, Stückzahl-Counter)</div>
@@ -88,25 +97,25 @@
     <div class="band"><a class="band__word" href="#">WHANE.</a>
       <div class="band__nav"><a class="link" href="#">Shop</a><a class="link" href="#">Lookbook</a><a class="link" href="#">Info</a></div></div>
     <div class="shop__viewport">
-      <button class="shop__arrow shop__arrow--prev" aria-label="Previous">&larr;</button>
-      <button class="shop__arrow shop__arrow--next" aria-label="Next">&rarr;</button>
-      <span class="shop__counter">01 / 03</span>
-      <div class="shop__track" tabindex="0">
-        <article class="shop__slide"><div class="shop__media"><span class="shop__media-cap">Field Jacket — front</span></div>
+      <button class="shop__arrow shop__arrow--prev" data-carousel-prev aria-label="Previous">&larr;</button>
+      <button class="shop__arrow shop__arrow--next" data-carousel-next aria-label="Next">&rarr;</button>
+      <span class="shop__counter" data-carousel-counter>01 / 03</span>
+      <div class="shop__track" data-carousel-track tabindex="0">
+        <article class="shop__slide" data-carousel-slide><a class="shop__media" href="#" style="display:block"><span class="shop__media-cap">Field Jacket →</span></a>
           <div class="shop__info"><span class="meta" style="font-size:12px;letter-spacing:3px">Drop 01</span>
             <h2 class="shop__title">Field Jacket</h2><span class="meta" style="font-size:13px;margin-top:24px">€280</span>
             <div style="margin-top:36px"><span class="meta" style="font-size:12px">Available</span>
               <div class="shop__count">37<small> / 100 · Limited to 100</small></div>
               <div class="shop__bar"><div class="shop__bar-fill" style="width:63%"></div></div></div>
             <span class="shop__cta">Reserve</span></div></article>
-        <article class="shop__slide"><div class="shop__media"><span class="shop__media-cap">Field Cap — front</span></div>
+        <article class="shop__slide" data-carousel-slide><a class="shop__media" href="#" style="display:block"><span class="shop__media-cap">Field Cap →</span></a>
           <div class="shop__info"><span class="meta" style="font-size:12px;letter-spacing:3px">Drop 01</span>
             <h2 class="shop__title">Field Cap</h2><span class="meta" style="font-size:13px;margin-top:24px">€90</span>
             <div style="margin-top:36px"><span class="meta" style="font-size:12px">Available</span>
               <div class="shop__count">8<small> / 50 · Limited to 50</small></div>
               <div class="shop__bar"><div class="shop__bar-fill" style="width:84%"></div></div></div>
             <span class="shop__cta">Reserve</span></div></article>
-        <article class="shop__slide"><div class="shop__media"><span class="shop__media-cap">Mono Tee — front</span></div>
+        <article class="shop__slide" data-carousel-slide><a class="shop__media" href="#" style="display:block"><span class="shop__media-cap">Mono Tee →</span></a>
           <div class="shop__info"><span class="meta" style="font-size:12px;letter-spacing:3px">Drop 01</span>
             <h2 class="shop__title">Mono Tee</h2><span class="meta" style="font-size:13px;margin-top:24px">€60</span>
             <div style="margin-top:36px"><span class="meta" style="font-size:12px">Available</span>
@@ -117,13 +126,26 @@
     </div>
   </div></div>
 
-  <div class="lab">Lookbook — Vollbild + Menüband (weiß)</div>
-  <div class="frame"><div class="lb">
+  <div class="lab">Lookbook — Karussell mehrerer Looks (← → / wischen) + Menüband (weiß)</div>
+  <div class="frame"><div class="lb" data-carousel>
     <div class="band band--overlay"><a class="band__word" href="#">WHANE.</a>
       <div class="band__nav"><a class="link" href="#">Shop</a><a class="link" href="#">Lookbook</a><a class="link" href="#">Info</a></div></div>
-    <div class="lb__bot">
-      <div><h1 class="lb__head">Autumn<br>Field</h1><span class="meta" style="font-size:11px;color:#fff;display:block;margin-top:16px">Look 01 / 06</span></div>
-      <a class="lb__enter" href="#">Enter shop →</a></div>
+    <div class="lb__vp">
+      <button class="lb__arrow lb__arrow--prev" data-carousel-prev aria-label="Previous">&larr;</button>
+      <button class="lb__arrow lb__arrow--next" data-carousel-next aria-label="Next">&rarr;</button>
+      <span class="lb__counter" data-carousel-counter>01 / 03</span>
+      <div class="lb__track" data-carousel-track tabindex="0">
+        <div class="lb__slide" data-carousel-slide><div class="lb__bot">
+          <div><h1 class="lb__head">Autumn<br>Field</h1><span class="meta" style="font-size:11px;color:#fff;display:block;margin-top:16px">Look 01 / 06</span></div>
+          <a class="lb__enter" href="#">Enter shop →</a></div></div>
+        <div class="lb__slide" data-carousel-slide><div class="lb__bot">
+          <div><h1 class="lb__head">Cobalt<br>Hour</h1><span class="meta" style="font-size:11px;color:#fff;display:block;margin-top:16px">Look 02 / 06</span></div>
+          <a class="lb__enter" href="#">Enter shop →</a></div></div>
+        <div class="lb__slide" data-carousel-slide><div class="lb__bot">
+          <div><h1 class="lb__head">Field<br>Notes</h1><span class="meta" style="font-size:11px;color:#fff;display:block;margin-top:16px">Look 03 / 06</span></div>
+          <a class="lb__enter" href="#">Enter shop →</a></div></div>
+      </div>
+    </div>
   </div></div>
 
   <div class="lab">Info — Vollbild, sparsam + Menüband</div>

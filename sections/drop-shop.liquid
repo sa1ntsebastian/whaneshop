@@ -14,11 +14,11 @@
 
   <div class="shop__viewport">
     {%- if products.size > 0 -%}
-      <button type="button" class="shop__arrow shop__arrow--prev" aria-label="Previous product">&larr;</button>
-      <button type="button" class="shop__arrow shop__arrow--next" aria-label="Next product">&rarr;</button>
-      <span class="shop__counter" aria-hidden="true">01 / {{ products.size }}</span>
+      <button type="button" class="shop__arrow shop__arrow--prev" data-carousel-prev aria-label="Previous product">&larr;</button>
+      <button type="button" class="shop__arrow shop__arrow--next" data-carousel-next aria-label="Next product">&rarr;</button>
+      <span class="shop__counter" data-carousel-counter aria-hidden="true">01 / {{ products.size }}</span>
 
-      <div class="shop__track" tabindex="0" aria-label="Products">
+      <div class="shop__track" data-carousel-track tabindex="0" aria-label="Products">
         {%- for product in products -%}
           {%- liquid
             assign drop_number = product.metafields.custom.drop_number.value
@@ -55,13 +55,13 @@
               endif
             endif
           -%}
-          <article class="shop__slide">
-            <div class="shop__media {% unless product.featured_image %}whane-placeholder--on-cobalt{% endunless %}">
+          <article class="shop__slide" data-carousel-slide>
+            <a class="shop__media {% unless product.featured_image %}whane-placeholder--on-cobalt{% endunless %}" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
               {%- if product.featured_image -%}
                 {{ product.featured_image | image_url: width: 1600 | image_tag: alt: product.title, loading: 'lazy', sizes: '56vw', widths: '600,900,1400,1600,2000' }}
               {%- endif -%}
-              <span class="shop__media-caption">{{ product.title | escape }}</span>
-            </div>
+              <span class="shop__media-caption">{{ product.title | escape }} →</span>
+            </a>
 
             <div class="shop__info">
               <span class="shop__eyebrow whane-meta">

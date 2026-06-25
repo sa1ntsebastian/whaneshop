@@ -1,19 +1,25 @@
-/* WHANE — shop carousel
-   Horizontal product carousel with prev/next arrows, native touch swipe
+/* WHANE — carousel
+   Generic full-screen carousel: prev/next arrows, native touch swipe
    (CSS scroll-snap), keyboard arrows, and a live "NN / TOTAL" counter.
-   No external dependencies.                                              */
+   Drives both the shop and the lookbook. No external dependencies.
+
+   Markup hooks (per [data-carousel] root):
+     [data-carousel-track]   horizontal scroll container
+     [data-carousel-slide]   one slide (children of the track)
+     [data-carousel-prev]    previous button
+     [data-carousel-next]    next button
+     [data-carousel-counter] live "NN / TOTAL" label                       */
 (function () {
   function pad(n) { return String(n).padStart(2, "0"); }
 
   function init(root) {
-    var track = root.querySelector(".shop__track");
+    var track = root.querySelector("[data-carousel-track]");
     if (!track) { return; }
 
-    var slides = track.querySelectorAll(".shop__slide");
-    var total = slides.length;
-    var prev = root.querySelector(".shop__arrow--prev");
-    var next = root.querySelector(".shop__arrow--next");
-    var counter = root.querySelector(".shop__counter");
+    var total = track.querySelectorAll("[data-carousel-slide]").length;
+    var prev = root.querySelector("[data-carousel-prev]");
+    var next = root.querySelector("[data-carousel-next]");
+    var counter = root.querySelector("[data-carousel-counter]");
 
     if (total <= 1) {
       if (prev) { prev.style.display = "none"; }
@@ -46,7 +52,8 @@
       raf = requestAnimationFrame(update);
     });
 
-    document.addEventListener("keydown", function (e) {
+    // Arrow keys move the carousel the pointer is hovering, else the first one.
+    root.addEventListener("keydown", function (e) {
       if (e.key === "ArrowRight") { go(current() + 1); }
       else if (e.key === "ArrowLeft") { go(current() - 1); }
     });
@@ -57,7 +64,7 @@
   }
 
   function boot() {
-    var roots = document.querySelectorAll(".shop[data-carousel]");
+    var roots = document.querySelectorAll("[data-carousel]");
     for (var i = 0; i < roots.length; i++) { init(roots[i]); }
   }
 

@@ -11,8 +11,8 @@ meta type, flat/square/no-shadow surfaces, generous intentional whitespace.
 | Page | Template | Notes |
 |---|---|---|
 | **Home** | `templates/index.json` (section `wordmark-hero`) | Giant `WHANE.` on white, minimal nav (Shop · Lookbook · Info), a single **„Zum Shop"** button. No menu band. |
-| **Shop / Drops** | `templates/page.drops.json` (section `drop-shop`) | Full-screen **product carousel** — click ← → or **swipe** between products. **No countdown**; scarcity shown as a live **stock counter** (`available / limited`) + bar. |
-| **Lookbook** | `templates/page.lookbook.json` (section `editorial-lookbook`) | Full-bleed on-figure image, sparse white overlay, menu band in white. |
+| **Shop / Drops** | `templates/page.drops.json` (section `drop-shop`) | Full-screen **product carousel** — click ← → or **swipe** between products. Each product **image links to its product page**. **No countdown**; scarcity shown as a live **stock counter** (`available / limited`) + bar. |
+| **Lookbook** | `templates/page.lookbook.json` (section `editorial-lookbook`) | Full-screen **carousel of looks** (← → / swipe), sparse white overlay, white menu band. Each look is a block (image + heading + look number). |
 | **Info** | `templates/page.info.json` (section `info`) | Sparse page content, menu band. |
 
 The **menu band** (wordmark + Shop · Lookbook · Info) appears on **every page
@@ -51,6 +51,10 @@ locales/   en.default.json
 - `border-radius:0` and `box-shadow:none` forced globally.
 - Display face: **Druk Condensed** via `@font-face` (licensed files included),
   **Anton** (Google Fonts) as metric fallback. Body/meta: `Courier New` monospace.
+- **Wordmark as SVG:** upload your logo to `assets/wordmark.svg`, then enable
+  *Theme settings → Brand → Use SVG wordmark*. It is inlined and **force-filled
+  cobalt** (always blue, never black) everywhere it appears — home, menu band,
+  lookbook overlay. Without it, the text wordmark `WHANE.` is used.
 - Diagonal stripe texture (`.whane-placeholder--*`) is only an image placeholder;
   it disappears once real photography is added.
 - Full-screen sections use `height:100vh; overflow:hidden` so pages never scroll.

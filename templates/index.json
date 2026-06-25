@@ -3,10 +3,9 @@
     "wordmark_hero": {
       "type": "wordmark-hero",
       "settings": {
-        "est_label": "Est. MMXXVI",
         "cta_label": "Zum Shop",
         "footer_left": "© WHANE",
-        "footer_right": "Berlin"
+        "footer_right": "VIE"
       }
     }
   },

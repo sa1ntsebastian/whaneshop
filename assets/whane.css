@@ -68,6 +68,12 @@ button { font-family: inherit; cursor: pointer; }
   margin: 0;
 }
 
+/* ---- SVG wordmark (assets/wordmark.svg) — always cobalt ----------------- */
+.whane-wm { display: inline-flex; align-items: center; line-height: 1; }
+.whane-wm svg { height: 1em; width: auto; display: block; }
+.whane-wm svg,
+.whane-wm svg :not([fill="none"]) { fill: var(--cobalt) !important; }
+
 /* ---- Visually hidden (a11y) --------------------------------------------- */
 .visually-hidden {
   position: absolute !important;
@@ -255,17 +261,38 @@ button { font-family: inherit; cursor: pointer; }
    Section: Editorial lookbook (Direction 03)
    ========================================================================== */
 .lookbook { position: relative; height: 100vh; overflow: hidden; background: var(--cobalt); }
+.lookbook__viewport { position: absolute; inset: 0; z-index: 1; }
+.lookbook__track {
+  display: flex; height: 100%;
+  overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.lookbook__track::-webkit-scrollbar { display: none; }
+.lookbook__slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; position: relative; }
 .lookbook__media { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
 .lookbook__media img { width: 100%; height: 100%; object-fit: cover; }
 .lookbook__media-note { font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.65); text-transform: uppercase; }
-.lookbook__top {
-  position: absolute; top: 40px; left: var(--pad-x); right: var(--pad-x);
-  display: flex; justify-content: space-between; align-items: flex-start;
-  color: var(--white);
+.lookbook__arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 54px; height: 54px; z-index: 3;
+  border: 1px solid var(--white); background: transparent; color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 20px; line-height: 1;
+  transition: background 120ms linear, color 120ms linear;
 }
-.lookbook__wordmark { font-family: var(--font-display); font-size: 30px; text-transform: uppercase; color: var(--white); }
+.lookbook__arrow:hover { background: var(--white); color: var(--cobalt); }
+.lookbook__arrow[disabled] { opacity: 0.3; cursor: not-allowed; }
+.lookbook__arrow--prev { left: 24px; }
+.lookbook__arrow--next { right: 24px; }
+.lookbook__counter {
+  position: absolute; left: 0; right: 0; bottom: 52px; z-index: 3;
+  text-align: center; color: var(--white);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  pointer-events: none;
+}
 .lookbook__bottom {
-  position: absolute; bottom: 48px; left: var(--pad-x); right: var(--pad-x);
+  position: absolute; bottom: 48px; left: var(--pad-x); right: var(--pad-x); z-index: 2;
   display: flex; justify-content: space-between; align-items: flex-end;
 }
 .lookbook__heading {
