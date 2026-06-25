@@ -12,12 +12,20 @@
     "shop": {
       "type": "drop-shop",
       "settings": {
-        "eyebrow": "The current drop",
-        "cta_label": "Reserve",
+        "collection": "w1",
+        "eyebrow": "{{ section.settings.collection.title }}",
+        "cta_label": "Shop now",
         "sold_out_label": "Sold out",
-        "fallback_available": "37"
+        "fallback_available": "20",
+        "show_placeholders": true,
+        "ph_titles": "Field Jacket,Field Cap,Mono Tee",
+        "ph_prices": "€280,€90,€60",
+        "ph_available": "37,0,120",
+        "ph_limited": "100,50,200"
       }
     }
   },
-  "order": ["shop"]
+  "order": [
+    "shop"
+  ]
 }
