@@ -17,8 +17,7 @@
         </div>
       {%- endfor -%}
 
-      <div class="whane-cart__foot">
-        <span class="whane-meta" style="font-size:11px;">Quantities update automatically</span>
+      <div class="whane-cart__foot" style="justify-content:flex-end;">
         <span class="whane-meta" style="font-size:13px;">Subtotal — {{ cart.total_price | money }}</span>
       </div>
       {%- comment -%} Fallback for visitors without JavaScript. {%- endcomment -%}
