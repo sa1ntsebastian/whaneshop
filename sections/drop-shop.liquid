@@ -28,12 +28,20 @@
               assign limited_to = product.metafields.custom.limited_to.value | plus: 0
             endif
 
+            comment
+              Shared inventory pool (Connected Inventory): every size mirrors the
+              same pool, so "available" is the quantity of a SINGLE variant (use
+              the max across tracked variants), NOT the sum — summing would
+              multiply the pool by the number of sizes.
+            endcomment
             assign available = 0
             assign has_tracked = false
             for variant in product.variants
               if variant.inventory_management != blank
                 assign has_tracked = true
-                assign available = available | plus: variant.inventory_quantity
+                if variant.inventory_quantity > available
+                  assign available = variant.inventory_quantity
+                endif
               endif
             endfor
             unless has_tracked
