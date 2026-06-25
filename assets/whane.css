@@ -467,11 +467,11 @@ button { font-family: inherit; cursor: pointer; }
   letter-spacing: 0.5px; color: var(--cobalt); margin: 0;
 }
 .info__brand p { margin: 0; }
-.info__brand-gap { margin-top: 1.7em; } /* the intentional blank line between blocks */
+.info__brand-block { margin-bottom: 1.7em; } /* blank line after WHANE. and after Based in VIE. */
 .info__block + .info__block { margin-top: 48px; }
 .info__label {
-  font-family: var(--font-display); font-size: 24px; letter-spacing: 0;
-  text-transform: uppercase; color: var(--cobalt); margin: 0 0 16px;
+  font-family: var(--font-display); font-size: 56px; line-height: 0.9; letter-spacing: -1px;
+  text-transform: uppercase; color: var(--cobalt); margin: 0 0 14px;
 }
 .info__lines { font-family: var(--font-mono); font-size: 13px; line-height: 1.9; letter-spacing: 0.5px; color: var(--cobalt); margin: 0; }
 .info__footer {
@@ -516,6 +516,7 @@ button { font-family: inherit; cursor: pointer; }
   .shop__counter { bottom: 32px; left: 28px; }
 
   .info__title { font-size: 64px; letter-spacing: -1px; }
+  .info__label { font-size: 40px; }
   .info__grid { grid-template-columns: 1fr; gap: 40px; margin-top: 40px; }
   .menu-band { padding: 24px 28px; }
   .menu-band__nav { gap: 20px; }
