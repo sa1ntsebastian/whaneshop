@@ -98,6 +98,7 @@ locales/   en.default.json
 | Metafield | Type | Purpose |
 |---|---|---|
 | `custom.drop_number` | single line text | e.g. `01` (eyebrow on each slide) |
+| `custom.item_code` | single line text | e.g. `W1.1` (drop 1, item 1) — shown above the title on the product page |
 | `custom.limited_to` | integer | the drop cap, e.g. `100` |
 
 (`drop_closes_at` is no longer used — the countdown was removed.)

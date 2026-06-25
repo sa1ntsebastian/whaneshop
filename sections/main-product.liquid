@@ -29,23 +29,13 @@
   </div>
 
   <div class="whane-product__info">
-    {%- liquid
-      assign norm = product.title | replace: '—', '-' | replace: '–', '-' | replace: '―', '-' | replace: '−', '-'
-      assign main_title = product.title
-      assign code = ''
-      if norm contains ' - '
-        assign parts = norm | split: ' - '
-        assign main_title = parts.first | strip
-        assign code = parts.last | strip
-      endif
-    -%}
-    {%- if code != blank -%}
-      <span class="whane-product__code whane-meta">{{ code }}</span>
-    {%- elsif product.metafields.custom.drop_number != blank -%}
-      <span class="whane-product__code whane-meta">Drop {{ product.metafields.custom.drop_number.value }}</span>
+    {%- comment -%} Item code (e.g. W1.1 = drop 1, item 1) from a product metafield, shown above the title. {%- endcomment -%}
+    {%- assign item_code = product.metafields.custom.item_code.value -%}
+    {%- if item_code != blank -%}
+      <span class="whane-product__code whane-meta">{{ item_code }}</span>
     {%- endif -%}
 
-    <h1 class="whane-product__title">{{ main_title | escape }}</h1>
+    <h1 class="whane-product__title">{{ product.title | escape }}</h1>
     <div class="whane-product__price whane-meta">{{ product.price | money }}</div>
 
     {%- if limited_to != blank -%}
