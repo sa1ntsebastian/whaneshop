@@ -35,20 +35,23 @@
       (with surrounding spaces, so codes like "W.1.1" aren't broken up).
     {%- endcomment -%}
     {%- liquid
-      assign sep = ''
-      if product.title contains '—'
-        assign sep = '—'
-      elsif product.title contains '–'
-        assign sep = '–'
-      elsif product.title contains ' - '
-        assign sep = ' - '
-      endif
+      comment Normalise every dash variant to a plain hyphen first. endcomment
+      assign norm = product.title | replace: '—', '-' | replace: '–', '-' | replace: '―', '-' | replace: '−', '-' | replace: '‑', '-' | replace: '‐', '-'
       assign main_title = product.title
       assign code = ''
+      assign sep = ''
+      if norm contains ' - '
+        assign sep = ' - '
+      else
+        assign dashbits = norm | split: '-'
+        if dashbits.size == 2
+          assign sep = '-'
+        endif
+      endif
       if sep != blank
-        assign title_parts = product.title | split: sep
-        assign main_title = title_parts[0] | strip
-        assign code = title_parts | last | strip
+        assign parts = norm | split: sep
+        assign main_title = parts[0] | strip
+        assign code = parts | last | strip
       endif
     -%}
     {%- if code != blank -%}
