@@ -5,9 +5,26 @@
 -%}
 
 <article class="whane-product">
-  <div class="whane-product__media {% unless product.featured_image %}whane-placeholder--on-cobalt{% endunless %}">
-    {%- if product.featured_image -%}
-      {{ product.featured_image | image_url: width: 1400 | image_tag: alt: product.title, loading: 'eager', sizes: '50vw', widths: '600,900,1400,1800' }}
+  <div class="whane-product__media {% unless product.featured_image %}whane-placeholder--on-cobalt{% endunless %}" {% if product.images.size > 0 %}data-carousel{% endif %}>
+    {%- if product.images.size > 0 -%}
+      {%- if product.images.size > 1 -%}
+        <button type="button" class="pgal__arrow pgal__arrow--prev" data-carousel-prev aria-label="Previous image">&larr;</button>
+        <button type="button" class="pgal__arrow pgal__arrow--next" data-carousel-next aria-label="Next image">&rarr;</button>
+        <span class="pgal__counter" data-carousel-counter aria-hidden="true">01 / {{ product.images.size }}</span>
+      {%- endif -%}
+      <div class="pgal__track" data-carousel-track tabindex="0" aria-label="{{ product.title | escape }} images">
+        {%- for image in product.images -%}
+          {%- liquid
+            assign loading = 'lazy'
+            if forloop.first
+              assign loading = 'eager'
+            endif
+          -%}
+          <div class="pgal__slide" data-carousel-slide>
+            {{ image | image_url: width: 1400 | image_tag: alt: image.alt | default: product.title, loading: loading, sizes: '50vw', widths: '600,900,1400,1800' }}
+          </div>
+        {%- endfor -%}
+      </div>
     {%- endif -%}
   </div>
 
@@ -52,6 +69,7 @@
   </div>
 </article>
 
+<script src="{{ 'carousel.js' | asset_url }}" defer="defer"></script>
 <script>
   // Keep the variant radio buttons visually in sync (flat active state).
   document.querySelectorAll('.whane-product__variants').forEach(function (group) {
