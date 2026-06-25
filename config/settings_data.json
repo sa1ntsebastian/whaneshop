@@ -18,7 +18,7 @@
     "nav_lookbook_label": "Lookbook",
     "nav_lookbook_link": "shopify://pages/lookbook-1",
     "nav_info_label": "Info",
-    "nav_info_link": "shopify://pages/lookbook",
+    "nav_info_link": "shopify://pages/info",
     "content_for_index": []
   },
   "presets": {
