@@ -35,19 +35,13 @@
         "id": "wordmark",
         "label": "Wordmark (text fallback)",
         "default": "WHANE.",
-        "info": "Always uppercase, always with the trailing period."
-      },
-      {
-        "type": "checkbox",
-        "id": "wordmark_use_svg",
-        "label": "Use SVG wordmark",
-        "default": false,
-        "info": "Upload the logo as assets/wordmark.svg, then enable. It is always rendered in cobalt."
+        "info": "Used only if assets/whane_logo.svg is absent. The SVG logo is auto-detected and always rendered in cobalt."
       },
       {
         "type": "image_picker",
         "id": "favicon",
-        "label": "Favicon"
+        "label": "Favicon",
+        "info": "Optional. Falls back to assets/favicon.png."
       }
     ]
   },

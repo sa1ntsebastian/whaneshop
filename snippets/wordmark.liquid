@@ -1,17 +1,15 @@
 {%- comment -%}
-  Wordmark — renders the brand SVG (assets/wordmark.svg) when enabled, else the
-  text wordmark from settings. The inline SVG is force-filled cobalt in CSS, so
-  it always renders blue (never black) regardless of the file's own colors.
-  Sizing is inherited from the parent's font-size (svg height: 1em).
+  Wordmark — renders the brand SVG (assets/whane_logo.svg) when present,
+  otherwise the text wordmark from settings. The inline SVG is force-filled
+  cobalt in CSS, so it always renders blue (never black) regardless of the
+  file's own colours. Size is inherited from the parent's font-size
+  (svg height: 1em).
 {%- endcomment -%}
 {%- liquid
-  assign svg = ''
-  if settings.wordmark_use_svg
-    assign svg = 'wordmark.svg' | inline_asset_content
-  endif
+  assign logo = 'whane_logo.svg' | inline_asset_content
 -%}
-{%- if svg contains '<svg' -%}
-  <span class="whane-wm" role="img" aria-label="{{ settings.wordmark | escape }}">{{ svg }}</span>
+{%- if logo contains '<svg' -%}
+  <span class="whane-wm" role="img" aria-label="{{ settings.wordmark | escape }}">{{ logo }}</span>
 {%- else -%}
   {{ settings.wordmark | escape }}
 {%- endif -%}
