@@ -358,7 +358,7 @@ button { font-family: inherit; cursor: pointer; }
 .whane-rte h1, .whane-rte h2, .whane-rte h3 { font-family: var(--font-display); text-transform: uppercase; letter-spacing: -1px; }
 
 /* ==========================================================================
-   Outline button (homepage "Zum Shop")
+   Outline button (homepage "Enter Shop")
    ========================================================================== */
 .whane-btn--outline {
   display: inline-block;

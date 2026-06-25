@@ -12,7 +12,7 @@
     "wordmark_hero": {
       "type": "wordmark-hero",
       "settings": {
-        "cta_label": "Zum Shop",
+        "cta_label": "Enter Shop",
         "footer_left": "© WHANE",
         "footer_right": "VIE"
       }
