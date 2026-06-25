@@ -85,6 +85,10 @@ locales/   en.default.json
 - Products come from the section's **Drop collection** setting.
 - Navigation: prev/next arrows, native touch **swipe** (CSS scroll-snap),
   ← → keyboard, and a live **`NN / TOTAL`** counter — all in `assets/carousel.js`.
+- Responsive arrows: side-centered on desktop; on mobile/tablet the layout
+  stacks (image over info) and the arrows drop to a **centered pair at the
+  bottom** so they never cover the product name. No fixed-position element
+  overlays text on mobile.
 - **Stock counter:** `available` is summed from tracked variant inventory; if a
   product isn't inventory-tracked it falls back to the section setting.
 - **Bar** width = `(limited_to − available) / limited_to` (fills as it sells out).

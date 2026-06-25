@@ -74,11 +74,20 @@
   .lb__counter{position:absolute;left:0;right:0;bottom:52px;z-index:3;text-align:center;color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;}
 
   /* INFO */
-  .info{height:100%;display:flex;flex-direction:column;background:#fff;}
-  .info__body{flex:1;min-height:0;padding:0 var(--pad-x);display:flex;}
-  .info__inner{margin:auto 0;max-width:760px;}
-  .info__title{font-family:var(--display);font-size:96px;line-height:.86;letter-spacing:-2px;text-transform:uppercase;margin:0 0 28px;}
-  .rte{font-family:var(--mono);font-size:14px;line-height:1.8;max-width:60ch;}
+  .info{min-height:100%;display:flex;flex-direction:column;background:#fff;}
+  .info__body{flex:1;display:flex;flex-direction:column;padding:0 var(--pad-x);}
+  .info__inner{flex:1;padding:56px 0 72px;}
+  .info__title{font-family:var(--display);font-size:140px;line-height:.82;letter-spacing:-3px;text-transform:uppercase;color:var(--cobalt);margin:0;}
+  .info__grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:64px;max-width:1100px;}
+  .info__brand{font-family:var(--mono);font-size:14px;line-height:1.9;letter-spacing:.5px;color:var(--cobalt);}
+  .info__brand p{margin:0;}
+  .info__brand-gap{margin-top:1.7em;}
+  .info__label{font-family:var(--display);font-size:24px;text-transform:uppercase;color:var(--cobalt);margin:0 0 16px;}
+  .info__block+.info__block{margin-top:48px;}
+  .info__lines{font-family:var(--mono);font-size:13px;line-height:1.9;letter-spacing:.5px;color:var(--cobalt);margin:0;}
+  .info__footer{display:flex;flex-wrap:wrap;gap:28px;align-items:center;border-top:1px solid var(--cobalt);padding:24px 0;}
+  .info__footer .link{font-size:11px;}
+  .info__footer-end{margin-left:auto;}
 </style>
 </head>
 <body>
@@ -148,15 +157,40 @@
     </div>
   </div></div>
 
-  <div class="lab">Info — Vollbild, sparsam + Menüband</div>
+  <div class="lab">Info — editorial (Headline · Brand · DROPS · CONTACT · Footer)</div>
   <div class="frame"><div class="info">
     <div class="band"><a class="band__word" href="#">WHANE.</a>
       <div class="band__nav"><a class="link" href="#">Shop</a><a class="link" href="#">Lookbook</a><a class="link" href="#">Info</a></div></div>
-    <div class="info__body"><div class="info__inner">
-      <h1 class="info__title">Info</h1>
-      <div class="rte"><p>WHANE. Wien. Limited, numbered drops.<br>Reduction to the essential — nothing more than necessary.</p>
-      <p>Est. MMXXVI · hello@whane.com</p></div>
-    </div></div>
+    <div class="info__body">
+      <div class="info__inner">
+        <h1 class="info__title">INFO</h1>
+        <div class="info__grid">
+          <div class="info__brand">
+            <p>WHANE.</p>
+            <p>Based in VIE.</p>
+            <p>Limited, numbered drops.</p>
+            <p class="info__brand-gap">When it's gone, it's gone.</p>
+          </div>
+          <div>
+            <div class="info__block">
+              <h2 class="info__label">Drops</h2>
+              <p class="info__lines">Each piece is limited and individually numbered.<br>Released once, in a fixed quantity.<br>After a drop sells out, it is not restocked or reproduced.</p>
+            </div>
+            <div class="info__block">
+              <h2 class="info__label">Contact</h2>
+              <p class="info__lines"><a class="link" href="mailto:hello@whane.at">hello@whane.at</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="info__footer">
+        <a class="link" href="#">Imprint</a>
+        <a class="link" href="#">Terms</a>
+        <a class="link" href="#">Privacy</a>
+        <a class="link" href="#">Returns</a>
+        <span class="meta info__footer-end" style="font-size:11px">© WHANE · VIE</span>
+      </footer>
+    </div>
   </div></div>
 
 </div>

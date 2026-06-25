@@ -1,22 +1,65 @@
 {%- comment -%}
-  Info — full screen, sparse, no scroll. Menu band + page content.
-  Uses the assigned page's title/content; falls back to section settings.
+  INFO — standalone editorial page for WHANE.
+  Design system (strict): cobalt #1B2BC4 + white only; Druk Condensed / Anton
+  display headlines (uppercase); monospace body in cobalt; flat, square, no
+  shadows; generous whitespace; English only; Vienna is always "VIE".
+
+  Layout: shared menu band (WHANE. + SHOP · LOOKBOOK · INFO) → left-aligned
+  "INFO" headline → two-column block (brand statement | DROPS + CONTACT) →
+  footer with the legally required EU links.
 {%- endcomment -%}
 
 <section class="info">
+  {%- comment -%} Shared header: logo top-left, SHOP · LOOKBOOK · INFO top-right. {%- endcomment -%}
   {% render 'menu-band' %}
 
   <div class="info__body">
     <div class="info__inner">
-      <h1 class="info__title">{{ page.title | default: section.settings.heading | escape }}</h1>
-      <div class="whane-rte">
-        {%- if page.content != blank -%}
-          {{ page.content }}
-        {%- else -%}
-          {{ section.settings.text }}
-        {%- endif -%}
+
+      {%- comment -%} Big condensed headline, left-positioned like the other pages. {%- endcomment -%}
+      <h1 class="info__title">{{ section.settings.heading | default: 'INFO' | escape }}</h1>
+
+      <div class="info__grid">
+
+        {%- comment -%}
+          Brand statement — four deliberate blocks. The line breaks and the
+          blank line before the last line are intentional and must stay.
+          Rendered as discrete lines so the spacing can never collapse.
+        {%- endcomment -%}
+        <div class="info__brand">
+          <p>WHANE.</p>
+          <p>Based in VIE.</p>
+          <p>Limited, numbered drops.</p>
+          <p class="info__brand-gap">When it's gone, it's gone.</p>
+        </div>
+
+        <div>
+          {%- comment -%} DROPS — dry, factual; no marketing phrasing. {%- endcomment -%}
+          <div class="info__block">
+            <h2 class="info__label">Drops</h2>
+            <p class="info__lines">{{ section.settings.drops_text | escape | newline_to_br }}</p>
+          </div>
+
+          {%- comment -%} CONTACT — single email. {%- endcomment -%}
+          <div class="info__block">
+            <h2 class="info__label">Contact</h2>
+            <p class="info__lines">
+              <a class="whane-link" href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email | escape }}</a>
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
+
+    {%- comment -%} Footer — small legal links (EU). Point these at your policy/placeholder pages. {%- endcomment -%}
+    <footer class="info__footer">
+      {%- if section.settings.imprint_url != blank -%}<a class="whane-link" href="{{ section.settings.imprint_url }}">Imprint</a>{%- endif -%}
+      {%- if section.settings.terms_url != blank -%}<a class="whane-link" href="{{ section.settings.terms_url }}">Terms</a>{%- endif -%}
+      {%- if section.settings.privacy_url != blank -%}<a class="whane-link" href="{{ section.settings.privacy_url }}">Privacy</a>{%- endif -%}
+      {%- if section.settings.returns_url != blank -%}<a class="whane-link" href="{{ section.settings.returns_url }}">Returns</a>{%- endif -%}
+      <span class="whane-meta info__footer-end" style="font-size:11px;">© WHANE · VIE</span>
+    </footer>
   </div>
 </section>
 
@@ -26,8 +69,19 @@
   "tag": "section",
   "class": "section-info",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading (fallback)", "default": "Info" },
-    { "type": "richtext", "id": "text", "label": "Text (fallback)", "default": "<p>WHANE. Wien. Limited, numbered drops. Reduction to the essential.</p>" }
+    { "type": "text", "id": "heading", "label": "Headline", "default": "INFO" },
+    {
+      "type": "textarea",
+      "id": "drops_text",
+      "label": "DROPS text",
+      "default": "Each piece is limited and individually numbered.\nReleased once, in a fixed quantity.\nAfter a drop sells out, it is not restocked or reproduced."
+    },
+    { "type": "text", "id": "contact_email", "label": "Contact email", "default": "hello@whane.at" },
+    { "type": "header", "content": "Footer legal links (EU)" },
+    { "type": "url", "id": "imprint_url", "label": "Imprint", "default": "/policies/legal-notice" },
+    { "type": "url", "id": "terms_url", "label": "Terms", "default": "/policies/terms-of-service" },
+    { "type": "url", "id": "privacy_url", "label": "Privacy", "default": "/policies/privacy-policy" },
+    { "type": "url", "id": "returns_url", "label": "Returns", "default": "/policies/refund-policy" }
   ],
   "presets": [{ "name": "Info" }]
 }
