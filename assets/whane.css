@@ -2,31 +2,18 @@
    WHANE — base theme stylesheet
    Two-color system only: Cobalt (#1B2BC4) + White (#FFFFFF).
    Flat, square corners, no shadows, no gradients, editorial.
-   ========================================================================== */
 
-/* ---- Fonts ---------------------------------------------------------------
-   Druk Condensed Super (licensed, supplied by brand) is the display face.
-   Anton (Google Fonts) is loaded in theme.liquid as a metric-compatible
-   fallback for any glyphs / weights Druk does not cover.                    */
-@font-face {
-  font-family: "Druk Condensed";
-  src: url("{{ 'DrukCondLCGSuper.ttf' | asset_url }}") format("truetype");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Druk Condensed";
-  src: url("{{ 'DrukCondLCGSuperItalic.ttf' | asset_url }}") format("truetype");
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
+   NOTE: This is a static .css file — Shopify does NOT process Liquid here.
+   The @font-face rules and the --cobalt / --white custom properties are
+   defined in a {% style %} block in layout/theme.liquid (which IS Liquid-
+   aware), because they need asset_url / theme settings. Hard fallbacks are
+   included below so the brand still renders if that block is ever missing.
+   ========================================================================== */
 
 /* ---- Tokens -------------------------------------------------------------- */
 :root {
-  --cobalt: {{ settings.color_cobalt }};
-  --white:  {{ settings.color_white }};
+  --cobalt: #1B2BC4;   /* overridden by theme.liquid from settings.color_cobalt */
+  --white:  #FFFFFF;    /* overridden by theme.liquid from settings.color_white  */
   --font-display: "Druk Condensed", "Anton", sans-serif;
   --font-mono: "Courier New", ui-monospace, monospace;
   --pad-x: 56px;

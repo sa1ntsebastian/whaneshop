@@ -30,6 +30,30 @@
     {{ content_for_header }}
 
     {{ 'whane.css' | asset_url | stylesheet_tag }}
+
+    {%- comment -%}
+      Liquid-aware CSS: @font-face (needs asset_url) and the brand colours
+      (from theme settings) MUST live here — a static .css asset does not get
+      Liquid processed, which would leave the colours undefined (black).
+      Loaded AFTER whane.css so the theme-setting colours win over the static
+      fallbacks defined in :root there.
+    {%- endcomment -%}
+    {% style %}
+      @font-face {
+        font-family: "Druk Condensed";
+        src: url({{ 'DrukCondLCGSuper.ttf' | asset_url }}) format("truetype");
+        font-weight: 900; font-style: normal; font-display: swap;
+      }
+      @font-face {
+        font-family: "Druk Condensed";
+        src: url({{ 'DrukCondLCGSuperItalic.ttf' | asset_url }}) format("truetype");
+        font-weight: 900; font-style: italic; font-display: swap;
+      }
+      :root {
+        --cobalt: {{ settings.color_cobalt | default: '#1B2BC4' }};
+        --white: {{ settings.color_white | default: '#FFFFFF' }};
+      }
+    {% endstyle %}
   </head>
 
   <body class="template-{{ request.page_type | handle }}">
