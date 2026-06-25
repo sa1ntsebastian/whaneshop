@@ -19,6 +19,9 @@
   .meta{font-family:var(--mono);text-transform:uppercase;letter-spacing:2px;color:var(--cobalt);}
   .link{font-family:var(--mono);text-transform:uppercase;letter-spacing:2px;color:var(--cobalt);font-size:12px;text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;}
   .link:hover{border-bottom-color:var(--cobalt);}
+  /* navbar links: hover = cobalt fill + white text (like the Enter Shop button) */
+  .band__nav .link,.home__nav .link{border-bottom:0;padding:6px 10px;transition:background 120ms linear,color 120ms linear;}
+  .band__nav .link:hover,.home__nav .link:hover{background:var(--cobalt);color:#fff;}
 
   /* menu band */
   .band{display:flex;justify-content:space-between;align-items:center;padding:32px var(--pad-x);border-bottom:1px solid var(--cobalt);background:var(--white);}
@@ -81,7 +84,9 @@
   .info__grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:64px;max-width:1100px;}
   .info__brand{font-family:var(--mono);font-size:14px;line-height:1.9;letter-spacing:.5px;color:var(--cobalt);}
   .info__brand p{margin:0;}
-  .info__brand-block{margin-bottom:1.7em;}
+  .info__brand-gap1{margin-bottom:1.7em;}
+  .info__brand-gap2{margin-bottom:3.4em;}
+  .info__hl{background:var(--cobalt);color:var(--white);padding:2px 8px;}
   .info__label{font-family:var(--display);font-size:56px;line-height:.9;letter-spacing:-1px;text-transform:uppercase;color:var(--cobalt);margin:0 0 14px;}
   .info__block+.info__block{margin-top:48px;}
   .info__lines{font-family:var(--mono);font-size:13px;line-height:1.9;letter-spacing:.5px;color:var(--cobalt);margin:0;}
@@ -166,9 +171,10 @@
         <h1 class="info__title">INFO</h1>
         <div class="info__grid">
           <div class="info__brand">
-            <p class="info__brand-block">WHANE.</p>
-            <p class="info__brand-block">Based in VIE.</p>
-            <p>Limited, numbered drops.<br>When it's gone, it's gone.</p>
+            <p class="info__brand-gap1">WHANE.</p>
+            <p class="info__brand-gap2">Based in VIE.</p>
+            <p class="info__brand-gap1">Limited, numbered drops.</p>
+            <p><span class="info__hl">When it's gone, it's gone.</span></p>
           </div>
           <div>
             <div class="info__block">

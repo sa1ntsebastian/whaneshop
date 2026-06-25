@@ -395,7 +395,21 @@ button { font-family: inherit; cursor: pointer; }
 }
 .menu-band--on-cobalt .menu-band__wordmark { color: var(--white); }
 .menu-band--on-cobalt .whane-link { color: var(--white); }
-.menu-band--on-cobalt .whane-link:hover { border-bottom-color: var(--white); }
+
+/* Navbar links — hover = cobalt fill + white text (same logic as the
+   "Enter Shop" button), instead of the underline used elsewhere. */
+.menu-band__nav .whane-link,
+.wordmark-hero__nav .whane-link {
+  border-bottom: 0;
+  padding: 6px 10px;
+  transition: background 120ms linear, color 120ms linear;
+}
+.menu-band__nav .whane-link:hover,
+.wordmark-hero__nav .whane-link:hover {
+  background: var(--cobalt);
+  color: var(--white);
+  border-bottom-color: transparent;
+}
 
 /* ==========================================================================
    Shop / Drops — full-screen product carousel (left/right + swipe)
@@ -467,7 +481,9 @@ button { font-family: inherit; cursor: pointer; }
   letter-spacing: 0.5px; color: var(--cobalt); margin: 0;
 }
 .info__brand p { margin: 0; }
-.info__brand-block { margin-bottom: 1.7em; } /* blank line after WHANE. and after Based in VIE. */
+.info__brand-gap1 { margin-bottom: 1.7em; } /* one blank line */
+.info__brand-gap2 { margin-bottom: 3.4em; } /* two blank lines */
+.info__hl { background: var(--cobalt); color: var(--white); padding: 2px 8px; } /* highlighted last line */
 .info__block + .info__block { margin-top: 48px; }
 .info__label {
   font-family: var(--font-display); font-size: 56px; line-height: 0.9; letter-spacing: -1px;
