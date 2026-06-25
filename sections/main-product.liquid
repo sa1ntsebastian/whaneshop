@@ -29,11 +29,22 @@
   </div>
 
   <div class="whane-product__info">
-    {%- if product.metafields.custom.drop_number != blank -%}
-      <span class="whane-meta" style="font-size:12px; letter-spacing:3px;">Drop {{ product.metafields.custom.drop_number.value }}</span>
+    {%- comment -%} Split a title like "WHANE. Tee — W.1.1": code shows small ABOVE the name. {%- endcomment -%}
+    {%- liquid
+      assign title_parts = product.title | split: '—'
+      assign main_title = title_parts[0] | strip
+      assign code = ''
+      if title_parts.size > 1
+        assign code = title_parts | last | strip
+      endif
+    -%}
+    {%- if code != blank -%}
+      <span class="whane-product__code whane-meta">{{ code }}</span>
+    {%- elsif product.metafields.custom.drop_number != blank -%}
+      <span class="whane-product__code whane-meta">Drop {{ product.metafields.custom.drop_number.value }}</span>
     {%- endif -%}
 
-    <h1 class="whane-product__title">{{ product.title | escape }}</h1>
+    <h1 class="whane-product__title">{{ main_title | escape }}</h1>
     <div class="whane-product__price whane-meta">{{ product.price | money }}</div>
 
     {%- if limited_to != blank -%}
@@ -57,7 +68,7 @@
       {%- endunless -%}
 
       {%- if product.available -%}
-        <button type="submit" name="add" class="whane-btn">Reserve</button>
+        <button type="submit" name="add" class="whane-btn">Buy now</button>
       {%- else -%}
         <button type="button" class="whane-btn" aria-disabled="true" disabled>Sold out</button>
       {%- endif -%}

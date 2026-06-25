@@ -23,5 +23,6 @@
     {%- if settings.nav_info_label != blank -%}
       <a class="whane-link" href="{{ settings.nav_info_link | default: '#' }}" style="font-size:12px;">{{ settings.nav_info_label | escape }}</a>
     {%- endif -%}
+    <a class="whane-link" href="{{ routes.cart_url }}" style="font-size:12px;">Cart ({{ cart.item_count }})</a>
   </nav>
 </header>

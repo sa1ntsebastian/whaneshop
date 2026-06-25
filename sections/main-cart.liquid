@@ -10,6 +10,7 @@
           <div>
             <input type="number" name="updates[]" value="{{ item.quantity }}" min="0"
                    aria-label="Quantity"
+                   onchange="this.form.submit()"
                    style="width:64px; border:1px solid {{ settings.color_cobalt }}; background:{{ settings.color_white }}; color:{{ settings.color_cobalt }}; font-family:'Courier New',monospace; padding:8px; text-align:center;">
           </div>
           <div style="text-align:right;">{{ item.final_line_price | money }}</div>
@@ -17,9 +18,13 @@
       {%- endfor -%}
 
       <div class="whane-cart__foot">
-        <button type="submit" name="update" class="whane-link" style="font-size:12px;">Update</button>
+        <span class="whane-meta" style="font-size:11px;">Quantities update automatically</span>
         <span class="whane-meta" style="font-size:13px;">Subtotal — {{ cart.total_price | money }}</span>
       </div>
+      {%- comment -%} Fallback for visitors without JavaScript. {%- endcomment -%}
+      <noscript>
+        <div style="margin-top:16px;"><button type="submit" name="update" class="whane-link" style="font-size:12px;">Update cart</button></div>
+      </noscript>
 
       <div style="margin-top:32px; max-width:320px;">
         <button type="submit" name="checkout" class="whane-btn">Checkout</button>

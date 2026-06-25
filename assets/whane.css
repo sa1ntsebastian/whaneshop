@@ -346,6 +346,7 @@ button { font-family: inherit; cursor: pointer; }
 .pgal__arrow--next { right: 20px; }
 .pgal__counter { position: absolute; left: 20px; bottom: 20px; z-index: 3; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--cobalt); background: var(--white); padding: 4px 8px; text-transform: uppercase; pointer-events: none; }
 .whane-product__info { padding: 64px; display: flex; flex-direction: column; justify-content: center; }
+.whane-product__code { display: block; font-size: 13px; letter-spacing: 2px; margin-bottom: 14px; }
 .whane-product__title { font-family: var(--font-display); font-size: 72px; line-height: 0.86; letter-spacing: 1px; text-transform: uppercase; margin: 0; }
 .whane-product__price { font-size: 14px; letter-spacing: 1px; margin-top: 24px; }
 .whane-product__desc { font-family: var(--font-mono); font-size: 13px; line-height: 1.7; letter-spacing: 0.5px; margin-top: 28px; }
