@@ -90,10 +90,8 @@
               {%- endif -%}
 
               {%- if product.available and available > 0 -%}
-                {%- form 'product', product, class: 'shop__cta' -%}
-                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                  <button type="submit" name="add" class="whane-btn">{{ section.settings.cta_label | escape }}</button>
-                {%- endform -%}
+                {%- comment -%} Link to the product page so the size can be chosen there. {%- endcomment -%}
+                <a class="whane-btn shop__cta" href="{{ product.url }}">{{ section.settings.cta_label | escape }}</a>
               {%- else -%}
                 <button type="button" class="whane-btn shop__cta" aria-disabled="true" disabled>{{ section.settings.sold_out_label | escape }}</button>
               {%- endif -%}
