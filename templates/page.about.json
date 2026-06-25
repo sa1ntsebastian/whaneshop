@@ -3,7 +3,11 @@
     "info": {
       "type": "info",
       "settings": {
-        "heading": "INFO"
+        "heading": "INFO",
+        "imprint_url": "/policies/legal-notice",
+        "terms_url": "/policies/terms-of-service",
+        "privacy_url": "/policies/privacy-policy",
+        "returns_url": "/policies/refund-policy"
       }
     }
   },
