@@ -35,7 +35,7 @@
       (with surrounding spaces, so codes like "W.1.1" aren't broken up).
     {%- endcomment -%}
     {%- liquid
-      comment Normalise every dash variant to a plain hyphen first. endcomment
+      # Normalise every dash variant to a plain hyphen first.
       assign norm = product.title | replace: '—', '-' | replace: '–', '-' | replace: '―', '-' | replace: '−', '-' | replace: '‑', '-' | replace: '‐', '-'
       assign main_title = product.title
       assign code = ''
