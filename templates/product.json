@@ -1,3 +1,7 @@
+/*
+ * Product page template. If this file is missing from the live theme,
+ * every /products/<handle> URL returns 404 — Shopify has no product layout.
+ */
 {
   "sections": {
     "header": { "type": "whane-header" },
