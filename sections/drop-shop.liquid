@@ -22,6 +22,7 @@
         {%- for product in products -%}
           {%- liquid
             assign drop_number = product.metafields.custom.drop_number.value
+            assign item_code = product.metafields.custom.item_code.value
 
             assign limited_to = 0
             if product.metafields.custom.limited_to != blank
@@ -73,7 +74,7 @@
 
             <div class="shop__info">
               <span class="shop__eyebrow whane-meta">
-                {%- if drop_number != blank -%}Drop {{ drop_number }}{%- else -%}{{ section.settings.eyebrow | escape }}{%- endif -%}
+                {%- if item_code != blank -%}{{ item_code }}{%- elsif drop_number != blank -%}Drop {{ drop_number }}{%- else -%}{{ section.settings.eyebrow | escape }}{%- endif -%}
               </span>
 
               <h2 class="shop__title">{{ product.title | escape }}</h2>
