@@ -42,7 +42,7 @@
         {%- if settings.locked_note != blank -%}
           <p class="drop-gate__note whane-meta">{{ settings.locked_note | escape }}</p>
         {%- endif -%}
-        <a class="whane-btn" href="{{ pages['early-access'].url | default: '/pages/early-access' }}">{{ settings.early_access_label | default: 'Early access' | escape }}</a>
+        <a class="whane-btn" href="{{ settings.early_access_link | default: pages['early-access'].url | default: '/pages/early-access' }}">{{ settings.early_access_label | default: 'Early access' | escape }}</a>
       </div>
     </div>
   {%- endif -%}

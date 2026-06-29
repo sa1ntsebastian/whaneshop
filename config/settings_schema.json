@@ -73,7 +73,8 @@
       { "type": "header", "content": "Locked-screen copy" },
       { "type": "text", "id": "locked_heading", "label": "Heading", "default": "Dropping soon" },
       { "type": "text", "id": "locked_note", "label": "Sub-note", "default": "The first drop is locked. Got a code?" },
-      { "type": "text", "id": "early_access_label", "label": "Early-access link label", "default": "Early access" }
+      { "type": "text", "id": "early_access_label", "label": "Early-access link label", "default": "Early access" },
+      { "type": "url", "id": "early_access_link", "label": "Early-access page link", "info": "Pick your early-access page from the dropdown — works regardless of its URL handle. Falls back to /pages/early-access." }
     ]
   }
 ]
