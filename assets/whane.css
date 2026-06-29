@@ -638,7 +638,7 @@ button { font-family: inherit; cursor: pointer; }
 .drop-notify__row { display: flex; gap: 0; }
 .drop-notify__input { flex: 1; font-family: var(--font-mono); font-size: 14px; letter-spacing: 1px; padding: 13px 14px; border: 1px solid var(--cobalt); border-right: 0; background: var(--white); color: var(--cobalt); border-radius: 0; min-width: 0; }
 .drop-notify__input:focus { outline: 2px solid var(--cobalt); outline-offset: -2px; }
-.drop-notify__btn { white-space: nowrap; }
+.drop-notify__btn { width: auto; flex: 0 0 auto; padding: 13px 18px; white-space: nowrap; }
 .drop-notify__ok { font-size: 12px; letter-spacing: 1px; }
 .drop-notify__err { font-size: 12px; letter-spacing: 1px; margin: 8px 0 0; }
 
