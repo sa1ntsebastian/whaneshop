@@ -67,23 +67,36 @@
               endif
             endif
           -%}
-          <a class="whane-card" href="{{ product.url }}">
-            <span class="whane-card__media {% unless product.featured_image %}whane-placeholder--on-white{% endunless %}">
-              {%- if product.featured_image -%}
-                {{ product.featured_image | image_url: width: 700 | image_tag: alt: product.title, loading: 'lazy', sizes: '(max-width:599px) 100vw, (max-width:999px) 50vw, 33vw', widths: '350,500,700,1000' }}
+          <div class="whane-card">
+            <div class="whane-card__media {% unless product.featured_image %}whane-placeholder--on-white{% endunless %}" {% if product.images.size > 1 %}data-carousel{% endif %}>
+              {%- if product.images.size > 0 -%}
+                {%- if product.images.size > 1 -%}
+                  <button type="button" class="cardgal__arrow cardgal__arrow--prev" data-carousel-prev aria-label="Previous image">&larr;</button>
+                  <button type="button" class="cardgal__arrow cardgal__arrow--next" data-carousel-next aria-label="Next image">&rarr;</button>
+                  <span class="cardgal__counter" data-carousel-counter aria-hidden="true">01 / {{ product.images.size }}</span>
+                {%- endif -%}
+                <div class="cardgal__track" data-carousel-track tabindex="0" aria-label="{{ product.title | escape }} images">
+                  {%- for image in product.images -%}
+                    <div class="cardgal__slide" data-carousel-slide>
+                      {{ image | image_url: width: 700 | image_tag: alt: image.alt | default: product.title, loading: 'lazy', sizes: '(max-width:599px) 100vw, (max-width:999px) 50vw, 33vw', widths: '350,500,700,1000' }}
+                    </div>
+                  {%- endfor -%}
+                </div>
               {%- endif -%}
-            </span>
+            </div>
 
-            {%- if item_code != blank -%}
-              <span class="whane-card__code whane-meta">{{ item_code }}</span>
-            {%- elsif drop_number != blank -%}
-              <span class="whane-card__code whane-meta">Drop {{ drop_number }}</span>
-            {%- endif -%}
+            <a class="whane-card__link" href="{{ product.url }}">
+              {%- if item_code != blank -%}
+                <span class="whane-card__code whane-meta">{{ item_code }}</span>
+              {%- elsif drop_number != blank -%}
+                <span class="whane-card__code whane-meta">Drop {{ drop_number }}</span>
+              {%- endif -%}
 
-            <span class="whane-card__title {% unless product.available and available > 0 %}whane-card__soldout{% endunless %}">{{ product.title | escape }}</span>
-            <span class="whane-card__price">
-              {%- if product.available and available > 0 -%}{{ product.price | money }}{%- else -%}{{ section.settings.sold_out_label | escape }}{%- endif -%}
-            </span>
+              <span class="whane-card__title {% unless product.available and available > 0 %}whane-card__soldout{% endunless %}">{{ product.title | escape }}</span>
+              <span class="whane-card__price">
+                {%- if product.available and available > 0 -%}{{ product.price | money }}{%- else -%}{{ section.settings.sold_out_label | escape }}{%- endif -%}
+              </span>
+            </a>
 
             {%- if limited_to > 0 -%}
               <span class="whane-card__avail">
@@ -93,7 +106,7 @@
                 </span>
               </span>
             {%- endif -%}
-          </a>
+          </div>
         {%- endfor -%}
       </div>
 
@@ -145,6 +158,8 @@
     {%- endif -%}
   </div>
 </section>
+
+<script src="{{ 'carousel.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {

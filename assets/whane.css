@@ -382,7 +382,7 @@ button { font-family: inherit; cursor: pointer; }
 .shop-grid__body { padding: 48px var(--pad-x) 80px; }
 .shop-grid__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 36px; }
 .shop-grid__title { font-family: var(--font-display); font-size: 96px; line-height: 0.86; letter-spacing: 1px; text-transform: uppercase; margin: 0; color: var(--cobalt); }
-.whane-card { text-decoration: none; color: var(--cobalt); }
+.whane-card__link { text-decoration: none; color: var(--cobalt); display: block; }
 .whane-card__code { display: block; font-size: 11px; letter-spacing: 2px; margin-bottom: 6px; }
 .whane-card__avail { display: block; margin-top: 14px; }
 .whane-card__count { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; margin-bottom: 6px; }
@@ -391,6 +391,36 @@ button { font-family: inherit; cursor: pointer; }
 /* Show the whole product image inside the tile (no cropping). */
 .shop-grid .whane-card__media { background: var(--white); }
 .shop-grid .whane-card__media img { object-fit: contain; }
+
+/* Per-tile image carousel: click arrows / swipe through a product's photos
+   without leaving the grid. Powered by carousel.js (one [data-carousel] per tile). */
+.cardgal__track {
+  position: absolute; inset: 0; display: flex;
+  overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.cardgal__track::-webkit-scrollbar { display: none; }
+.cardgal__slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; position: relative; }
+.cardgal__slide img { width: 100%; height: 100%; object-fit: contain; }
+.cardgal__arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 34px; height: 34px; z-index: 3;
+  border: 1px solid var(--cobalt); background: var(--white); color: var(--cobalt);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 14px; line-height: 1; cursor: pointer;
+  transition: background 120ms linear, color 120ms linear;
+}
+.cardgal__arrow:hover { background: var(--cobalt); color: var(--white); }
+.cardgal__arrow[disabled] { opacity: 0.2; cursor: not-allowed; }
+.cardgal__arrow--prev { left: 10px; }
+.cardgal__arrow--next { right: 10px; }
+.cardgal__counter {
+  position: absolute; left: 10px; bottom: 10px; z-index: 3;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px;
+  color: var(--cobalt); background: var(--white); padding: 3px 6px;
+  text-transform: uppercase; pointer-events: none;
+}
 
 .whane-cart { padding: 56px var(--pad-x) 96px; }
 .whane-cart__title { font-family: var(--font-display); font-size: 96px; line-height: 0.86; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 40px; }
