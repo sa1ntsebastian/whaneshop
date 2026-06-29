@@ -388,6 +388,9 @@ button { font-family: inherit; cursor: pointer; }
 .whane-card__count { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; margin-bottom: 6px; }
 .whane-card__bar { display: block; height: 6px; border: 1px solid var(--cobalt); }
 .whane-card__bar-fill { display: block; height: 100%; background: var(--cobalt); }
+/* Show the whole product image inside the tile (no cropping). */
+.shop-grid .whane-card__media { background: var(--white); }
+.shop-grid .whane-card__media img { object-fit: contain; }
 
 .whane-cart { padding: 56px var(--pad-x) 96px; }
 .whane-cart__title { font-family: var(--font-display); font-size: 96px; line-height: 0.86; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 40px; }
