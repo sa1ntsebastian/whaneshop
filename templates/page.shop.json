@@ -10,11 +10,11 @@
 {
   "sections": {
     "shop": {
-      "type": "drop-shop",
+      "type": "shop-grid",
       "settings": {
         "collection": "w1",
-        "eyebrow": "{{ section.settings.collection.title }}",
-        "cta_label": "View product",
+        "heading": "Shop",
+        "eyebrow": "The current drop",
         "sold_out_label": "Sold out",
         "fallback_available": "20",
         "show_placeholders": true,

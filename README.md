@@ -11,7 +11,7 @@ meta type, flat/square/no-shadow surfaces, generous intentional whitespace.
 | Page | Template | Notes |
 |---|---|---|
 | **Home** | `templates/index.json` (section `wordmark-hero`) | Giant `WHANE.` on white, minimal nav (Shop · Lookbook · Info), a single **"Enter Shop"** button. No menu band. |
-| **Shop / Drops** | `templates/page.shop.json` (section `drop-shop`) | Full-screen **product carousel** — click ← → or **swipe** between products. Each product **image links to its product page**. **No countdown**; scarcity shown as a live **stock counter** (`available / limited`) + bar. |
+| **Shop / Drops** | `templates/page.shop.json` (section `shop-grid`) | **Overview grid** of every product in the drop — each card links to its product page. **No countdown**; scarcity shown per card as a live **stock counter** (`available / limited`) + bar; sold-out stays visible (struck through). (The old one-product-at-a-time carousel lives on in `sections/drop-shop.liquid`, now unused.) |
 | **Lookbook** | `templates/page.lookbook.json` (section `editorial-lookbook`) | Full-screen **carousel of looks** (← → / swipe), sparse white overlay, white menu band. Each look is a block (image + heading + look number). |
 | **Info** | `templates/page.info.json` (section `info`) | Sparse page content, menu band. |
 

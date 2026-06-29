@@ -376,6 +376,19 @@ button { font-family: inherit; cursor: pointer; }
 .whane-card__price { font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px; margin-top: 6px; }
 .whane-card__soldout { text-decoration: line-through; }
 
+/* Shop grid (overview) — replaces the product carousel. Reuses .whane-grid /
+   .whane-card; adds the item-code eyebrow + per-card availability bar. */
+.shop-grid { display: flex; flex-direction: column; min-height: 100vh; background: var(--white); }
+.shop-grid__body { padding: 48px var(--pad-x) 80px; }
+.shop-grid__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 36px; }
+.shop-grid__title { font-family: var(--font-display); font-size: 96px; line-height: 0.86; letter-spacing: 1px; text-transform: uppercase; margin: 0; color: var(--cobalt); }
+.whane-card { text-decoration: none; color: var(--cobalt); }
+.whane-card__code { display: block; font-size: 11px; letter-spacing: 2px; margin-bottom: 6px; }
+.whane-card__avail { display: block; margin-top: 14px; }
+.whane-card__count { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; margin-bottom: 6px; }
+.whane-card__bar { display: block; height: 6px; border: 1px solid var(--cobalt); }
+.whane-card__bar-fill { display: block; height: 100%; background: var(--cobalt); }
+
 .whane-cart { padding: 56px var(--pad-x) 96px; }
 .whane-cart__title { font-family: var(--font-display); font-size: 96px; line-height: 0.86; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 40px; }
 .whane-cart__row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--cobalt); align-items: center; font-family: var(--font-mono); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
@@ -539,7 +552,7 @@ button { font-family: inherit; cursor: pointer; }
   .whane-product__media { border-right: 0; border-bottom: 1px solid var(--cobalt); min-height: 50vh; }
   .whane-product__title { font-size: 52px; }
   .whane-grid { grid-template-columns: repeat(2, 1fr); }
-  .whane-collection__title, .whane-cart__title { font-size: 56px; }
+  .whane-collection__title, .whane-cart__title, .shop-grid__title { font-size: 56px; }
 
   .shop__slide { flex-direction: column; }
   .shop__media { width: 100%; height: 45%; border-right: 0; border-bottom: 1px solid var(--cobalt); }
