@@ -401,7 +401,7 @@ button { font-family: inherit; cursor: pointer; }
   scrollbar-width: none; -ms-overflow-style: none;
 }
 .cardgal__track::-webkit-scrollbar { display: none; }
-.cardgal__slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; position: relative; }
+.cardgal__slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; position: relative; display: block; cursor: pointer; }
 .cardgal__slide img { width: 100%; height: 100%; object-fit: contain; }
 .cardgal__arrow {
   position: absolute; top: 50%; transform: translateY(-50%);

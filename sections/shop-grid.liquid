@@ -77,9 +77,9 @@
                 {%- endif -%}
                 <div class="cardgal__track" data-carousel-track tabindex="0" aria-label="{{ product.title | escape }} images">
                   {%- for image in product.images -%}
-                    <div class="cardgal__slide" data-carousel-slide>
+                    <a class="cardgal__slide" data-carousel-slide href="{{ product.url }}" aria-label="{{ product.title | escape }}">
                       {{ image | image_url: width: 700 | image_tag: alt: image.alt | default: product.title, loading: 'lazy', sizes: '(max-width:599px) 100vw, (max-width:999px) 50vw, 33vw', widths: '350,500,700,1000' }}
-                    </div>
+                    </a>
                   {%- endfor -%}
                 </div>
               {%- endif -%}
