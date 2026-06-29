@@ -21,24 +21,23 @@
 
   function pad(n) { return String(n).padStart(2, "0"); }
 
-  /* ---- Locked Shop overlay + countdown ---------------------------------- */
+  /* ---- Early-access reveal: drop the locked Shop overlay for code holders */
   function initOverlay() {
     var overlay = document.querySelector("[data-drop-overlay]");
     if (!overlay) { return; }
-
+    if (!isUnlocked()) { return; }
     var section = overlay.closest(".shop-grid");
+    overlay.parentNode && overlay.parentNode.removeChild(overlay);
+    if (section) { section.classList.remove("shop-grid--locked"); }
+  }
 
-    // Early-access visitor: reveal the Shop immediately.
-    if (isUnlocked()) {
-      overlay.parentNode && overlay.parentNode.removeChild(overlay);
-      if (section) { section.classList.remove("shop-grid--locked"); }
-      return;
-    }
-
-    var cd = overlay.querySelector("[data-drop-countdown]");
-    if (!cd) { return; }
+  /* ---- Countdown(s): any [data-drop-countdown] ticks; reloads at zero so
+          the server re-renders unlocked (Shop opens, hero countdown clears). */
+  function startCountdown(cd) {
     var target = Date.parse(cd.getAttribute("data-drop-at"));
     if (isNaN(target)) { return; }
+    // A removed overlay (early-access reveal) leaves no countdown to run.
+    if (!cd.isConnected) { return; }
 
     var elD = cd.querySelector("[data-dd]");
     var elH = cd.querySelector("[data-hh]");
@@ -63,6 +62,11 @@
     }
     tick();
     setInterval(tick, 1000);
+  }
+
+  function initCountdowns() {
+    var list = document.querySelectorAll("[data-drop-countdown]");
+    for (var i = 0; i < list.length; i++) { startCountdown(list[i]); }
   }
 
   /* ---- Early-access code form ------------------------------------------- */
@@ -98,7 +102,7 @@
     });
   }
 
-  function boot() { initOverlay(); initForm(); }
+  function boot() { initOverlay(); initCountdowns(); initForm(); }
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", boot);

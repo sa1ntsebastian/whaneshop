@@ -19,8 +19,28 @@
     </nav>
   </header>
 
+  {%- liquid
+    assign show_cd = false
+    if settings.drop_gate_enabled and settings.drop_at != blank
+      assign now_ts = 'now' | date: '%s' | plus: 0
+      assign drop_ts = settings.drop_at | date: '%s' | plus: 0
+      if now_ts < drop_ts
+        assign show_cd = true
+      endif
+    endif
+  -%}
+
   <div class="wordmark-hero__main">
     <h1 class="wordmark-hero__wordmark">{% render 'wordmark' %}</h1>
+
+    {%- if show_cd -%}
+      <div class="hero-countdown" data-drop-countdown data-drop-at="{{ settings.drop_at | escape }}" aria-label="Time until the first drop">
+        <span class="hero-countdown__label whane-meta">{{ section.settings.countdown_label | default: 'First drop' | escape }}</span>
+        <span class="hero-countdown__time">
+          <b data-dd>00</b><i>d</i> <b data-hh>00</b><i>h</i> <b data-mm>00</b><i>m</i> <b data-ss>00</b><i>s</i>
+        </span>
+      </div>
+    {%- endif -%}
 
     {%- if section.settings.cta_label != blank -%}
       <a class="whane-btn--outline wordmark-hero__cta"
@@ -36,6 +56,8 @@
   </footer>
 </section>
 
+<script src="{{ 'drop-gate.js' | asset_url }}" defer="defer"></script>
+
 {% schema %}
 {
   "name": "Wordmark hero",
@@ -43,6 +65,8 @@
   "class": "section-wordmark-hero",
   "settings": [
     { "type": "paragraph", "content": "Wordmark (text or SVG) and nav links (Shop · Lookbook · Info) are set in Theme settings → Brand / Navigation." },
+    { "type": "header", "content": "Drop countdown" },
+    { "type": "text", "id": "countdown_label", "label": "Countdown label", "default": "First drop", "info": "Shown above the timer. The countdown only appears while the drop gate is on (Theme settings → Drop / Early access) and the drop time is in the future." },
     { "type": "header", "content": "Call to action" },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "Enter Shop" },
     { "type": "url", "id": "cta_link", "label": "Button link", "info": "Defaults to the Shop nav link." },
