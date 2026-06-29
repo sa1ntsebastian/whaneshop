@@ -15,9 +15,10 @@
         <p class="early__intro whane-meta">{{ section.settings.intro | escape }}</p>
       {%- endif -%}
 
+      {%- comment -%} Redirect target = the Shop nav link (handle-independent: works for /drops, /shop, anything). {%- endcomment -%}
       <form class="early__form" data-early-form
             data-codes="{{ settings.early_code | escape }}"
-            data-shop-url="{{ pages['shop'].url | default: '/pages/shop' }}">
+            data-shop-url="{{ settings.nav_shop_link | default: pages['shop'].url | default: routes.root_url }}">
         <label class="early__label whane-meta" for="early-code">{{ section.settings.field_label | default: 'Access code' | escape }}</label>
         <input class="early__input" id="early-code" name="early-code" type="text"
                autocomplete="off" autocapitalize="characters" spellcheck="false"
