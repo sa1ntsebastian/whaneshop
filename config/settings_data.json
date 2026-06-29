@@ -12,13 +12,16 @@
     "color_cobalt": "#1B2BC4",
     "color_white": "#FFFFFF",
     "wordmark": "WHANE.",
-    "wordmark_use_svg": false,
     "nav_shop_label": "Shop",
     "nav_shop_link": "shopify://pages/drops",
     "nav_lookbook_label": "Lookbook",
     "nav_lookbook_link": "shopify://pages/lookbook-1",
     "nav_info_label": "Info",
     "nav_info_link": "shopify://pages/info",
+    "drop_gate_enabled": true,
+    "drop_at": "2026-09-01T19:00:00+02:00",
+    "early_code": "FRIENDSANDFAMILY",
+    "wordmark_use_svg": false,
     "content_for_index": []
   },
   "presets": {
