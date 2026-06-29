@@ -43,6 +43,25 @@
           <p class="drop-gate__note whane-meta">{{ settings.locked_note | escape }}</p>
         {%- endif -%}
         <a class="whane-btn" href="{{ settings.early_access_link | default: pages['early-access'].url | default: '/pages/early-access' }}">{{ settings.early_access_label | default: 'Early access' | escape }}</a>
+
+        {%- comment -%} Capture waiting demand: native Shopify email signup (marketing consent + waitlist tag). {%- endcomment -%}
+        <div class="drop-notify">
+          <p class="drop-notify__lead whane-meta">{{ section.settings.notify_heading | default: 'Or get notified when it drops' | escape }}</p>
+          {%- form 'customer', class: 'drop-notify__form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter, drop-waitlist">
+            {%- if form.posted_successfully? -%}
+              <p class="drop-notify__ok whane-meta">{{ section.settings.notify_success | default: "You're on the list — we'll email you when it drops." | escape }}</p>
+            {%- else -%}
+              <div class="drop-notify__row">
+                <input class="drop-notify__input" type="email" name="contact[email]" aria-label="Email" placeholder="{{ section.settings.notify_placeholder | default: 'Email' | escape }}" required>
+                <button type="submit" class="whane-btn drop-notify__btn">{{ section.settings.notify_button | default: 'Notify me' | escape }}</button>
+              </div>
+              {%- if form.errors -%}
+                <p class="drop-notify__err whane-meta">{{ form.errors | default_errors }}</p>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endform -%}
+        </div>
       </div>
     </div>
   {%- endif -%}
@@ -209,6 +228,11 @@
     { "type": "text", "id": "sold_out_label", "label": "Sold-out label", "default": "Sold out" },
     { "type": "header", "content": "Scarcity" },
     { "type": "text", "id": "fallback_available", "label": "Available (fallback)", "default": "20", "info": "Used only when a product has no tracked inventory." },
+    { "type": "header", "content": "Locked-screen signup", "info": "Shown on the locked Shop screen (when the drop gate is on). Emails go to your Shopify customer list with marketing consent + the 'drop-waitlist' tag." },
+    { "type": "text", "id": "notify_heading", "label": "Signup heading", "default": "Or get notified when it drops" },
+    { "type": "text", "id": "notify_placeholder", "label": "Input placeholder", "default": "Email" },
+    { "type": "text", "id": "notify_button", "label": "Button label", "default": "Notify me" },
+    { "type": "text", "id": "notify_success", "label": "Success message", "default": "You're on the list — we'll email you when it drops." },
     { "type": "header", "content": "Placeholder demo" },
     { "type": "checkbox", "id": "show_placeholders", "label": "Show demo products when no collection / empty", "default": true, "info": "Lets you test the grid before connecting a collection. Turn off for production." },
     { "type": "text", "id": "ph_titles", "label": "Demo titles (comma-separated)", "default": "Field Jacket,Field Cap,Mono Tee" },
