@@ -1,0 +1,53 @@
+{%- comment -%}
+  Early-access code page. Visitors enter a code; on match, drop-gate.js
+  remembers it (localStorage) and sends them to the Shop, which then renders
+  unlocked client-side even before the public drop time.
+  Soft gate for the test phase — see assets/drop-gate.js.
+{%- endcomment -%}
+
+<section class="early">
+  {% render 'menu-band' %}
+
+  <div class="early__body">
+    <div class="early__inner">
+      <h1 class="early__title">{{ section.settings.heading | default: 'Early access' | escape }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <p class="early__intro whane-meta">{{ section.settings.intro | escape }}</p>
+      {%- endif -%}
+
+      <form class="early__form" data-early-form
+            data-codes="{{ settings.early_code | escape }}"
+            data-shop-url="{{ pages['shop'].url | default: '/pages/shop' }}">
+        <label class="early__label whane-meta" for="early-code">{{ section.settings.field_label | default: 'Access code' | escape }}</label>
+        <input class="early__input" id="early-code" name="early-code" type="text"
+               autocomplete="off" autocapitalize="characters" spellcheck="false"
+               data-early-input placeholder="{{ section.settings.placeholder | default: 'Enter code' | escape }}">
+        <button type="submit" class="whane-btn early__submit">{{ section.settings.button_label | default: 'Unlock' | escape }}</button>
+        <p class="early__error whane-meta" data-early-error role="status" aria-live="polite"></p>
+      </form>
+
+      {%- if section.settings.note != blank -%}
+        <p class="early__note whane-meta">{{ section.settings.note | escape }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'drop-gate.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Early access",
+  "tag": "section",
+  "class": "section-early",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Early access" },
+    { "type": "text", "id": "intro", "label": "Intro line", "default": "Got a code? Unlock the first drop early." },
+    { "type": "text", "id": "field_label", "label": "Field label", "default": "Access code" },
+    { "type": "text", "id": "placeholder", "label": "Input placeholder", "default": "Enter code" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Unlock" },
+    { "type": "text", "id": "note", "label": "Footnote", "default": "No code? The drop opens for everyone at launch." }
+  ],
+  "presets": [{ "name": "Early access" }]
+}
+{% endschema %}

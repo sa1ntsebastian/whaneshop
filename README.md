@@ -103,6 +103,24 @@ locales/   en.default.json
 
 (`drop_closes_at` is no longer used — the countdown was removed.)
 
+## Drop gate / early access (soft, test phase)
+Locks the **Shop** page until a set time, with a code page for insiders.
+- **Theme settings → Drop / Early access:** turn on *Lock the Shop until the
+  drop*, set *Drop date & time* (ISO 8601 **with offset**, e.g.
+  `2026-07-15T18:00:00+02:00`), and one or more *Early-access code(s)*
+  (comma-separated, case-insensitive).
+- Before the time, `/pages/shop` shows a **countdown** + an *Early access*
+  button. At the time it **unlocks automatically for everyone** (enforced
+  server-side in Liquid; the page auto-reloads at zero).
+- **Early-access page:** create a Page with handle `early-access` and template
+  **early-access** (`/pages/early-access`). Entering a valid code remembers it
+  (localStorage) and reveals the Shop early. Optionally add a URL redirect
+  `/early-access → /pages/early-access`.
+- ⚠️ **Soft gate:** the code lives in the page source and is bypassable by
+  technical users — fine for hype/testing, not a hard lock. For a hard lock use
+  Shopify *scheduled publishing* or an app (e.g. Locksmith). Logic lives in
+  `assets/drop-gate.js`.
+
 ## Notes
 - Imagery is placeholder (striped texture). Add real product images (carousel)
   and a full-body shot (lookbook image picker).

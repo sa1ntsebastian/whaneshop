@@ -59,5 +59,21 @@
       { "type": "text", "id": "nav_info_label", "label": "Link 3 label", "default": "Info" },
       { "type": "url", "id": "nav_info_link", "label": "Link 3 URL — select the Info page" }
     ]
+  },
+  {
+    "name": "Drop / Early access",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Locks the Shop page until the drop time, with an early-access code page (/pages/early-access). NOTE: this is a soft, client-side gate for the test phase — the code lives in the page source and is bypassable by technical users. For a hard lock use scheduled publishing or an app (e.g. Locksmith)."
+      },
+      { "type": "checkbox", "id": "drop_gate_enabled", "label": "Lock the Shop until the drop", "default": false },
+      { "type": "text", "id": "drop_at", "label": "Drop date & time (ISO 8601)", "info": "Include the timezone offset, e.g. 2026-07-15T18:00:00+02:00 (Vienna summer = +02:00). At this moment the Shop unlocks automatically for everyone." },
+      { "type": "text", "id": "early_code", "label": "Early-access code(s)", "info": "Comma-separated for multiple, e.g. WHANE1,INSIDER. Case-insensitive." },
+      { "type": "header", "content": "Locked-screen copy" },
+      { "type": "text", "id": "locked_heading", "label": "Heading", "default": "Dropping soon" },
+      { "type": "text", "id": "locked_note", "label": "Sub-note", "default": "The first drop is locked. Got a code?" },
+      { "type": "text", "id": "early_access_label", "label": "Early-access link label", "default": "Early access" }
+    ]
   }
 ]
